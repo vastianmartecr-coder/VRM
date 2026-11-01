@@ -34,6 +34,23 @@
     h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.2; margin: 0 0 20px; }
     .lead { font-size: 1.2rem; color: var(--muted); max-width: 700px; margin: 0 auto 40px; }
     
+    /* Botones Enlace */
+    .btn-link {
+      display: inline-block;
+      background: var(--text);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 15px 30px;
+      font-weight: 700;
+      border-radius: 8px;
+      margin-top: 10px;
+      transition: background 0.3s;
+      font-size: 1rem;
+    }
+    .btn-link:hover {
+      background: var(--accent);
+    }
+    
     /* About / Capabilities */
     .section { padding: 60px 0; border-bottom: 1px solid var(--line); }
     .section-title { color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: 600; }
@@ -77,9 +94,12 @@
     <section class="hero container">
       <h1>Expert Computer Science Solutions for Any Project</h1>
       <p class="lead">My team has expertise in everything related to Computer Science. If it involves code, systems, or software, we can build it. We work exclusively on a per-project basis for US clients.</p>
+      
+      <a href="#proceso" class="btn-link">Conoce nuestro proceso para empezar a trabajar en tu proyecto en 4 simples pasos</a>
     </section>
 
-    <section class="section container">
+    <!-- Se agregó el ID "proceso" para que el botón redireccione aquí -->
+    <section id="proceso" class="section container">
       <div class="section-title">How We Work</div>
       <h2>A Simple, Direct Process</h2>
       <p style="color: var(--muted); font-size: 1.1rem;">We don't limit ourselves to a specific list of services because what we do depends entirely on your project. We can handle any Computer Science challenge.</p>
@@ -106,6 +126,10 @@
           <p style="color: var(--muted); margin: 10px 0 0;">Once approved, we start moving immediately. We guarantee adherence to both the agreed timeline and budget.</p>
         </div>
       </div>
+      
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="#solicitud" class="btn-link">Enviar solicitud</a>
+      </div>
     </section>
 
     <section class="section container">
@@ -121,7 +145,8 @@
         <h3 style="margin-top: 0;">Direct Deposit Information</h3>
         <p style="margin: 0; color: #dce2f0;">To proceed with payments, please use the following account details:</p>
         <div class="payment-details">
-          <div><strong>Bank:</strong> One Deposit Savings</div>
+          <div><strong>Bank:</strong> Citizens Bank</div>
+          <div><strong>Account Type:</strong> One Deposit Savings/Savings</div>
           <div><strong>Account Name:</strong> Vastian Rosario Marte</div>
           <div><strong>Routing Number:</strong> 241070417</div>
           <div><strong>Account Number:</strong> 4565591156</div>
@@ -141,7 +166,8 @@
       </div>
     </section>
 
-    <section class="section container" style="border: none; padding-bottom: 100px;">
+    <!-- Se agregó el ID "solicitud" para que el segundo botón redireccione aquí -->
+    <section id="solicitud" class="section container" style="border: none; padding-bottom: 100px;">
       <div class="section-title">Start Your Project</div>
       <h2>Send Us Your Idea</h2>
       <p style="color: var(--muted);">Just give us a brief explanation of what you need. We'll handle the rest.</p>
@@ -178,4 +204,5 @@
     });
   </script>
 </body>
-</html>
+  </html>
+  
