@@ -34,21 +34,23 @@
     h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.2; margin: 0 0 20px; }
     .lead { font-size: 1.2rem; color: var(--muted); max-width: 700px; margin: 0 auto 40px; }
     
-    /* Botones Enlace */
+    /* Action Buttons */
     .btn-link {
       display: inline-block;
-      background: var(--text);
+      background: var(--accent);
       color: var(--bg);
       text-decoration: none;
-      padding: 15px 30px;
+      padding: 16px 32px;
       font-weight: 700;
       border-radius: 8px;
-      margin-top: 10px;
-      transition: background 0.3s;
-      font-size: 1rem;
+      margin-top: 15px;
+      transition: opacity 0.3s, transform 0.2s;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 14px rgba(145, 162, 255, 0.3);
     }
     .btn-link:hover {
-      background: var(--accent);
+      opacity: 0.9;
+      transform: translateY(-2px);
     }
     
     /* About / Capabilities */
@@ -74,7 +76,7 @@
     label { display: block; margin-bottom: 8px; color: var(--muted); }
     input, textarea { width: 100%; padding: 15px; background: rgba(0,0,0,0.2); border: 1px solid var(--line); color: white; border-radius: 8px; font-family: inherit; }
     textarea { height: 150px; resize: vertical; }
-    button { background: var(--text); color: var(--bg); border: none; padding: 15px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1rem; width: 100%; }
+    button { background: var(--text); color: var(--bg); border: none; padding: 15px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1.1rem; width: 100%; transition: background 0.3s; }
     button:hover { background: var(--accent); }
 
     @media (max-width: 768px) {
@@ -95,11 +97,12 @@
       <h1>Expert Computer Science Solutions for Any Project</h1>
       <p class="lead">My team has expertise in everything related to Computer Science. If it involves code, systems, or software, we can build it. We work exclusively on a per-project basis for US clients.</p>
       
-      <a href="#proceso" class="btn-link">Conoce nuestro proceso para empezar a trabajar en tu proyecto en 4 simples pasos</a>
+      <!-- Primer botón: Call to action corto e inteligente -->
+      <a href="#process" class="btn-link">Click Here to See Our 4-Step Process</a>
     </section>
 
-    <!-- Se agregó el ID "proceso" para que el botón redireccione aquí -->
-    <section id="proceso" class="section container">
+    <!-- Sección del proceso con el ID correspondiente -->
+    <section id="process" class="section container">
       <div class="section-title">How We Work</div>
       <h2>A Simple, Direct Process</h2>
       <p style="color: var(--muted); font-size: 1.1rem;">We don't limit ourselves to a specific list of services because what we do depends entirely on your project. We can handle any Computer Science challenge.</p>
@@ -127,8 +130,9 @@
         </div>
       </div>
       
+      <!-- Segundo botón: Corto y directo hacia el formulario -->
       <div style="text-align: center; margin-top: 40px;">
-        <a href="#solicitud" class="btn-link">Enviar solicitud</a>
+        <a href="#request" class="btn-link">Submit Your Request</a>
       </div>
     </section>
 
@@ -166,8 +170,8 @@
       </div>
     </section>
 
-    <!-- Se agregó el ID "solicitud" para que el segundo botón redireccione aquí -->
-    <section id="solicitud" class="section container" style="border: none; padding-bottom: 100px;">
+    <!-- Sección del formulario con el ID correspondiente -->
+    <section id="request" class="section container" style="border: none; padding-bottom: 100px;">
       <div class="section-title">Start Your Project</div>
       <h2>Send Us Your Idea</h2>
       <p style="color: var(--muted);">Just give us a brief explanation of what you need. We'll handle the rest.</p>
