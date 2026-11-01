@@ -25,17 +25,14 @@
     body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
     .container { width: min(var(--max), 100% - 40px); margin: 0 auto; }
     
-    /* Header original intacto con menú de 3 líneas */
     header { padding: 30px 0; border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 100; }
     .header-wrapper { display: flex; justify-content: space-between; align-items: center; position: relative; }
     .brand { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
     .brand span { color: var(--accent); }
     
-    /* Menú Hamburguesa */
     .hamburger { display: flex; flex-direction: column; gap: 6px; background: transparent; border: none; cursor: pointer; padding: 5px; }
     .hamburger span { display: block; width: 30px; height: 3px; background-color: var(--text); border-radius: 2px; }
     
-    /* Ventana del Menú Desplegable (Con X) */
     .nav-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(9, 12, 20, 0.95); z-index: 200; justify-content: center; align-items: center; }
     .nav-menu-overlay.active { display: flex; }
     .nav-menu-content { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 40px; width: 90%; max-width: 400px; text-align: center; position: relative; }
@@ -57,10 +54,13 @@
     .section-title { color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: 600; }
     h2 { font-size: 2.5rem; margin: 0 0 20px; }
     
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
+    .process-step { background: rgba(255, 255, 255, 0.03); padding: 35px; border-radius: 16px; border: 1px solid var(--line); }
+    .step-num { color: var(--accent); font-weight: 700; font-size: 1.5rem; margin-bottom: 15px; display: block; }
+
     .founder-profile { display: flex; gap: 40px; align-items: center; background: var(--panel); padding: 50px; border-radius: 20px; margin-top: 40px; }
     .founder-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); flex-shrink: 0; }
     
-    /* FAQ Accordion */
     .faq-container { margin-top: 40px; }
     .faq-item { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line); margin-bottom: 15px; border-radius: 8px; overflow: hidden; }
     .faq-question { width: 100%; text-align: left; padding: 20px; background: transparent; border: none; color: var(--text); font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -79,7 +79,6 @@
     input, textarea { width: 100%; padding: 16px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--line); color: white; border-radius: 8px; font-family: inherit; font-size: 1rem; }
     textarea { height: 180px; resize: vertical; }
     
-    /* Casillas y Enlaces de Políticas */
     .checkbox-container { margin-bottom: 25px; }
     .checkbox-group { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.95rem; }
     .checkbox-group input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--accent); cursor: pointer; }
@@ -89,7 +88,6 @@
     button[type="submit"] { background: var(--text); color: var(--bg); border: none; padding: 18px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1.1rem; width: 100%; transition: background 0.3s; }
     button[type="submit"]:hover { background: var(--accent); }
     
-    /* Modales Extensos con Scroll */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(9, 12, 20, 0.95); z-index: 999; justify-content: center; align-items: center; padding: 20px; }
     .modal-content { background: var(--panel); width: 100%; max-width: 800px; height: 85vh; display: flex; flex-direction: column; border-radius: 12px; border: 1px solid var(--line); position: relative; }
     .modal-header { padding: 25px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
@@ -109,7 +107,6 @@
 </head>
 <body>
 
-  <!-- Header y Menú Hamburguesa -->
   <header>
     <div class="container header-wrapper">
       <a href="#" class="brand">VRM <span>Tech Solutions</span></a>
@@ -125,7 +122,7 @@
       <a href="#about" class="nav-link">About Us / Leadership</a>
       <a href="#faq" class="nav-link">FAQs</a>
       <a href="#request" class="nav-link">Contact & Start Project</a>
-      <a href="#payment-info" class="nav-link">Payment Details</a>
+      <a href="#payment-info" class="nav-link">Make a Payment</a>
     </div>
   </div>
 
@@ -136,6 +133,36 @@
       <div>
         <a href="#process" class="btn-link">Click Here to See Our 4-Step Process</a>
         <a href="#payment-info" class="btn-link btn-payment">Make a Payment</a>
+      </div>
+    </section>
+
+    <!-- Sección de Procesos Restaurada -->
+    <section id="process" class="section container">
+      <div class="section-title">How We Work</div>
+      <h2>A Simple, Direct Process</h2>
+      <p style="color: var(--muted); font-size: 1.1rem; max-width: 600px;">We don't limit ourselves to a specific list of services because what we do depends entirely on your project. We can handle any Computer Science challenge.</p>
+      
+      <div class="process-grid">
+        <div class="process-step">
+          <span class="step-num">01 / Submit</span>
+          <strong>Send a Brief Explanation</strong>
+          <p style="color: var(--muted); margin: 15px 0 0;">Use the form below to tell us roughly what you want to build. Keep it simple and direct.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">02 / Connect</span>
+          <strong>24-Hour Zoom Response</strong>
+          <p style="color: var(--muted); margin: 15px 0 0;">We will contact you within 24 hours to schedule a Zoom meeting and discuss your project in exact detail.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">03 / Evaluate</span>
+          <strong>Time & Budget Assessment</strong>
+          <p style="color: var(--muted); margin: 15px 0 0;">I will consult with my technical team to determine the exact timeline and budget needed, and then present the proposal to you.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">04 / Execute</span>
+          <strong>Project Kickoff & Delivery</strong>
+          <p style="color: var(--muted); margin: 15px 0 0;">Once approved, we start moving immediately. We guarantee adherence to both the agreed timeline and budget.</p>
+        </div>
       </div>
     </section>
 
@@ -151,12 +178,11 @@
       </div>
     </section>
 
-    <!-- Sección de FAQs Extensas Desplegables -->
     <section id="faq" class="section container">
       <div class="section-title">Knowledge Base</div>
       <h2>Frequently Asked Questions (FAQs)</h2>
       <div class="faq-container" id="faq-list">
-        <!-- Generando 20 FAQs con JS para mantener el código limpio, pero las pondré en HTML para SEO -->
+        <!-- Generado dinámicamente por JS -->
       </div>
     </section>
 
@@ -183,7 +209,6 @@
           <textarea id="message" required placeholder="Tell us about your project..."></textarea>
         </div>
 
-        <!-- Casilla Privacy -->
         <div class="checkbox-container">
           <div class="checkbox-group">
             <input type="checkbox" id="privacyConsent" onclick="handleCheckboxClick(event, 'privacy')">
@@ -193,7 +218,6 @@
           <div class="error-message" id="privacyError">⚠️ You must read and accept the Privacy Policy from the window first.</div>
         </div>
 
-        <!-- Casilla Terms -->
         <div class="checkbox-container">
           <div class="checkbox-group">
             <input type="checkbox" id="termsConsent" onclick="handleCheckboxClick(event, 'terms')">
@@ -223,7 +247,7 @@
     <p style="margin-top: 60px; font-size: 0.9rem; color: var(--muted);">&copy; 2026 VRM Tech Solutions. All rights reserved.</p>
   </footer>
 
-  <!-- Modal: Privacy Policy Extensa -->
+  <!-- Modal Privacy Policy -->
   <div id="privacyModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -231,7 +255,6 @@
         <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
       </div>
       <div class="modal-body" id="privacyBody">
-        <!-- Se insertan muchos párrafos simulando un documento legal muy extenso -->
         <p><strong>Last Updated: November 2026</strong></p>
         <h4>1. Introduction and Scope</h4>
         <p>VRM Tech Solutions ("we," "our," or "us") respects your privacy and is fully committed to protecting your personal data. This comprehensive Privacy Policy explicitly outlines how we collect, use, process, and protect any information you provide when you interact with our website, use our services, or communicate with our staff.</p>
@@ -252,7 +275,7 @@
         <p>The security of your data is paramount. We implement enterprise-grade encryption (SSL/TLS) for data in transit and AES-256 for data at rest. Access to personal data is strictly role-based. While we strive to use commercially acceptable means to protect your data, no internet transmission is 100% secure.</p>
         <p>In the unlikely event of a data breach, we will notify affected clients within 72 hours, detailing the nature of the breach and the mitigation steps taken.</p>
         <h4>7. Cookies and Tracking Technologies</h4>
-        <p>We use session and persistent cookies to track website activity and store certain information to enhance user experience. You can instruct your browser to refuse all cookies, but doing so may limit your ability to use certain functionalities of our site.</p>
+                <p>We use session and persistent cookies to track website activity and store certain information to enhance user experience. You can instruct your browser to refuse all cookies, but doing so may limit your ability to use certain functionalities of our site.</p>
         <h4>8. User Rights (GDPR & CCPA Compliance)</h4>
         <p>Depending on your jurisdiction, you possess specific rights regarding your data: The right to access, the right to rectification, the right to erasure (Right to be Forgotten), the right to restrict processing, and the right to data portability. To exercise any of these rights, contact us at info@vrmtechsolution.com. We have 30 days to respond to lawful requests.</p>
         <h4>9. Children's Privacy</h4>
@@ -266,12 +289,12 @@
     </div>
   </div>
 
-  <!-- Modal: Terms and Conditions Extensos -->
+  <!-- Modal Terms and Conditions -->
   <div id="termsModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Terms and Conditions</h3>
-                <button class="close-modal" onclick="closeModal('termsModal')">&times;</button>
+        <button class="close-modal" onclick="closeModal('termsModal')">&times;</button>
       </div>
       <div class="modal-body" id="termsBody">
         <p><strong>Effective Date: November 2026</strong></p>
@@ -309,7 +332,6 @@
   </div>
 
   <script>
-    // --- LÓGICA DE MENÚ HAMBURGUESA ---
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const navOverlay = document.getElementById('nav-overlay');
     const closeNavBtn = document.getElementById('close-nav-btn');
@@ -329,7 +351,6 @@
       });
     });
 
-    // --- LÓGICA DE LAS FAQs (Acordeón de 25 preguntas) ---
     const faqData = [
       { q: "1. What exact services does VRM Tech Solutions offer?", a: "We provide comprehensive computer science services, including React full-stack development, AI automation, custom educational software, API integration, and cloud infrastructure management." },
       { q: "2. Do you work with international clients?", a: "Currently, our services are strictly tailored and provided exclusively for clients and businesses based in the United States." },
@@ -384,18 +405,16 @@
       });
     });
 
-    // --- LÓGICA DE VALIDACIÓN DE POLÍTICAS ---
     let isPrivacyAccepted = false;
     let isTermsAccepted = false;
 
-    // Impedir que se marque si no ha aceptado en el modal
     function handleCheckboxClick(event, type) {
       if (type === 'privacy' && !isPrivacyAccepted) {
-        event.preventDefault(); // Evita que se marque
+        event.preventDefault();
         document.getElementById('privacyError').style.display = 'block';
       }
       if (type === 'terms' && !isTermsAccepted) {
-        event.preventDefault(); // Evita que se marque
+        event.preventDefault();
         document.getElementById('termsError').style.display = 'block';
       }
     }
@@ -410,22 +429,20 @@
       document.body.style.overflow = 'auto'; 
     }
 
-    // Botón aceptar al final del modal
     function acceptPolicy(type) {
       if (type === 'privacy') {
         isPrivacyAccepted = true;
-        document.getElementById('privacyConsent').checked = true; // Se marca automáticamente
-        document.getElementById('privacyError').style.display = 'none'; // Se oculta el error
+        document.getElementById('privacyConsent').checked = true;
+        document.getElementById('privacyError').style.display = 'none';
         closeModal('privacyModal');
       } else if (type === 'terms') {
         isTermsAccepted = true;
-        document.getElementById('termsConsent').checked = true; // Se marca automáticamente
-        document.getElementById('termsError').style.display = 'none'; // Se oculta el error
+        document.getElementById('termsConsent').checked = true;
+        document.getElementById('termsError').style.display = 'none';
         closeModal('termsModal');
       }
     }
 
-    // Enviar el formulario a info@vrmtechsolution.com
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
@@ -437,7 +454,7 @@
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const phone = document.getElementById('phone').value;
-      const message = document.getElementById('message').value;
+            const message = document.getElementById('message').value;
 
       const subject = `Project Inquiry from ${name}`;
       const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0A%0D%0AProject Explanation:%0D%0A${message}`;
@@ -447,3 +464,5 @@
   </script>
 </body>
 </html>
+
+  
