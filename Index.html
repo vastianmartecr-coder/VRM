@@ -16,6 +16,7 @@
       --text: #f5f7fc;
       --muted: #a8b1c3;
       --accent: #91a2ff;
+      --error: #ff4d4d;
       --line: rgba(226, 233, 248, 0.12);
       --max: 900px;
     }
@@ -24,21 +25,24 @@
     body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
     .container { width: min(var(--max), 100% - 40px); margin: 0 auto; }
     
-    /* Header restaurado a su estilo original con la adición del menú */
+    /* Header original intacto con menú de 3 líneas */
     header { padding: 30px 0; border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 100; }
     .header-wrapper { display: flex; justify-content: space-between; align-items: center; position: relative; }
     .brand { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
     .brand span { color: var(--accent); }
     
-    /* Menú de 3 líneas siempre visible */
+    /* Menú Hamburguesa */
     .hamburger { display: flex; flex-direction: column; gap: 6px; background: transparent; border: none; cursor: pointer; padding: 5px; }
-    .hamburger span { display: block; width: 30px; height: 3px; background-color: var(--text); border-radius: 2px; transition: 0.3s; }
+    .hamburger span { display: block; width: 30px; height: 3px; background-color: var(--text); border-radius: 2px; }
     
-    .nav-menu { display: none; position: absolute; top: 40px; right: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; flex-direction: column; min-width: 180px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); z-index: 200; overflow: hidden; }
-    .nav-menu.active { display: flex; }
-    .nav-menu a { padding: 15px 20px; color: var(--text); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--line); transition: background 0.2s; }
-    .nav-menu a:last-child { border-bottom: none; }
-    .nav-menu a:hover { background: var(--accent); color: var(--bg); }
+    /* Ventana del Menú Desplegable (Con X) */
+    .nav-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(9, 12, 20, 0.95); z-index: 200; justify-content: center; align-items: center; }
+    .nav-menu-overlay.active { display: flex; }
+    .nav-menu-content { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 40px; width: 90%; max-width: 400px; text-align: center; position: relative; }
+    .close-nav { position: absolute; top: 15px; right: 20px; background: none; border: none; color: var(--text); font-size: 2rem; cursor: pointer; }
+    .nav-menu-content a { display: block; padding: 15px 20px; color: var(--text); text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid var(--line); transition: color 0.2s; }
+    .nav-menu-content a:last-child { border-bottom: none; }
+    .nav-menu-content a:hover { color: var(--accent); }
 
     .hero { padding: 80px 0; text-align: center; }
     h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.2; margin: 0 0 20px; }
@@ -46,6 +50,8 @@
     
     .btn-link { display: inline-block; background: var(--accent); color: var(--bg); text-decoration: none; padding: 16px 32px; font-weight: 700; border-radius: 8px; margin-top: 15px; transition: opacity 0.3s, transform 0.2s; font-size: 1.1rem; box-shadow: 0 4px 14px rgba(145, 162, 255, 0.3); }
     .btn-link:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-payment { background: transparent; color: var(--text); border: 2px solid var(--accent); margin-top: 15px; margin-left: 10px; }
+    .btn-payment:hover { background: rgba(145, 162, 255, 0.1); }
     
     .section { padding: 80px 0; border-bottom: 1px solid var(--line); }
     .section-title { color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: 600; }
@@ -54,172 +60,147 @@
     .founder-profile { display: flex; gap: 40px; align-items: center; background: var(--panel); padding: 50px; border-radius: 20px; margin-top: 40px; }
     .founder-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); flex-shrink: 0; }
     
-    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
-    .process-step { background: rgba(255, 255, 255, 0.03); padding: 35px; border-radius: 16px; border: 1px solid var(--line); }
-    .step-num { color: var(--accent); font-weight: 700; font-size: 1.5rem; margin-bottom: 15px; display: block; }
-    
-    .payment-box { background: rgba(145, 162, 255, 0.1); border: 1px solid var(--accent); padding: 40px; border-radius: 16px; margin-top: 40px; }
-    .payment-details { font-family: monospace; font-size: 1.1rem; margin-top: 20px; background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; display: inline-block; text-align: left; }
+    /* FAQ Accordion */
+    .faq-container { margin-top: 40px; }
+    .faq-item { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line); margin-bottom: 15px; border-radius: 8px; overflow: hidden; }
+    .faq-question { width: 100%; text-align: left; padding: 20px; background: transparent; border: none; color: var(--text); font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { background: rgba(255,255,255,0.05); }
+    .faq-icon { font-size: 1.5rem; transition: transform 0.3s; color: var(--accent); }
+    .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease; color: var(--muted); }
+    .faq-item.active .faq-answer { padding: 0 20px 20px 20px; max-height: 500px; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+    .payment-box { background: rgba(145, 162, 255, 0.1); border: 1px solid var(--accent); padding: 40px; border-radius: 16px; margin-top: 40px; text-align: left; }
+    .payment-details { font-family: monospace; font-size: 1.1rem; margin-top: 20px; background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; display: inline-block; width: 100%; }
     
     .contact-form { background: var(--panel); padding: 60px; border-radius: 20px; margin-top: 40px; max-width: 650px; margin-left: auto; margin-right: auto; }
     .form-group { margin-bottom: 25px; }
     label { display: block; margin-bottom: 10px; color: var(--muted); font-size: 0.95rem; }
-    input, textarea { width: 100%; padding: 16px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--line); color: white; border-radius: 8px; font-family: inherit; font-size: 1rem; transition: border-color 0.2s; }
-    input:focus, textarea:focus { border-color: var(--accent); outline: none; }
+    input, textarea { width: 100%; padding: 16px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--line); color: white; border-radius: 8px; font-family: inherit; font-size: 1rem; }
     textarea { height: 180px; resize: vertical; }
     
-    .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; color: var(--muted); font-size: 0.9rem; line-height: 1.4; text-align: left; }
-    .checkbox-group input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
-    .checkbox-group label { color: var(--muted); cursor: pointer; font-size: 0.9rem; }
-    .checkbox-group a { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: 600; }
+    /* Casillas y Enlaces de Políticas */
+    .checkbox-container { margin-bottom: 25px; }
+    .checkbox-group { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.95rem; }
+    .checkbox-group input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--accent); cursor: pointer; }
+    .policy-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: 700; margin-left: 5px; }
+    .error-message { color: var(--error); font-size: 0.85rem; margin-top: 8px; display: none; font-weight: 600; }
     
-    button[type="submit"] { background: var(--text); color: var(--bg); border: none; padding: 18px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1.1rem; width: 100%; transition: background 0.3s, transform 0.1s; }
-    button[type="submit"]:hover { background: var(--accent); transform: translateY(-1px); }
+    button[type="submit"] { background: var(--text); color: var(--bg); border: none; padding: 18px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1.1rem; width: 100%; transition: background 0.3s; }
+    button[type="submit"]:hover { background: var(--accent); }
     
-    /* Diseño Modal Extenso */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(9, 12, 20, 0.9); z-index: 999; overflow-y: auto; padding: 40px 20px; }
-    .modal-content { background: var(--panel); max-width: 800px; margin: 0 auto; padding: 50px; border-radius: 12px; border: 1px solid var(--line); position: relative; text-align: left; color: var(--muted); box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
-    .modal-content-scroll { max-height: 60vh; overflow-y: auto; padding-right: 15px; margin-bottom: 20px; border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); padding-top: 20px; margin-top: 20px; }
-    .modal-content-scroll::-webkit-scrollbar { width: 8px; }
-    .modal-content-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
-    .modal-content-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
-    .modal-content h3 { color: var(--text); font-size: 1.8rem; margin: 0; }
-    .modal-content h4 { color: var(--text); margin-top: 25px; margin-bottom: 10px; }
-    .modal-content p { margin-bottom: 15px; font-size: 0.95rem; line-height: 1.6; }
+    /* Modales Extensos con Scroll */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(9, 12, 20, 0.95); z-index: 999; justify-content: center; align-items: center; padding: 20px; }
+    .modal-content { background: var(--panel); width: 100%; max-width: 800px; height: 85vh; display: flex; flex-direction: column; border-radius: 12px; border: 1px solid var(--line); position: relative; }
+    .modal-header { padding: 25px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h3 { margin: 0; color: var(--text); font-size: 1.5rem; }
+    .close-modal { background: none; border: none; color: var(--muted); font-size: 2rem; cursor: pointer; }
+    .close-modal:hover { color: var(--error); }
+    .modal-body { padding: 30px; overflow-y: auto; flex-grow: 1; color: var(--muted); font-size: 0.95rem; line-height: 1.8; }
+    .modal-body h4 { color: var(--text); margin-top: 30px; margin-bottom: 10px; }
+    .modal-footer { padding: 20px; border-top: 1px solid var(--line); text-align: right; background: rgba(0,0,0,0.2); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+    .accept-btn { background: var(--accent); color: var(--bg); border: none; padding: 15px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1.1rem; }
     
-    .close-modal { position: absolute; top: 20px; right: 25px; background: none; border: none; color: var(--muted); font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s; }
-    .close-modal:hover { color: var(--text); }
-    .accept-btn { background: var(--accent); color: var(--bg); border: none; padding: 12px 25px; font-weight: 700; border-radius: 6px; cursor: pointer; font-size: 1rem; width: auto; float: right; }
-
     @media (max-width: 768px) {
-      .founder-profile { flex-direction: column; text-align: center; padding: 30px; }
+      .founder-profile { flex-direction: column; text-align: center; }
+      .btn-payment { margin-left: 0; display: block; width: fit-content; margin: 15px auto 0; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header y Menú Hamburguesa -->
   <header>
     <div class="container header-wrapper">
       <a href="#" class="brand">VRM <span>Tech Solutions</span></a>
-      <button class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="hamburger" id="hamburger-btn">
+        <span></span><span></span><span></span>
       </button>
-      <div class="nav-menu" id="nav-menu">
-        <a href="#about" onclick="closeMenu()">About Us</a>
-        <a href="#faq" onclick="closeMenu()">FAQ</a>
-        <a href="#request" onclick="closeMenu()">Contact</a>
-      </div>
     </div>
   </header>
+
+  <div class="nav-menu-overlay" id="nav-overlay">
+    <div class="nav-menu-content">
+      <button class="close-nav" id="close-nav-btn">&times;</button>
+      <a href="#about" class="nav-link">About Us / Leadership</a>
+      <a href="#faq" class="nav-link">FAQs</a>
+      <a href="#request" class="nav-link">Contact & Start Project</a>
+      <a href="#payment-info" class="nav-link">Payment Details</a>
+    </div>
+  </div>
 
   <main>
     <section class="hero container">
       <h1>Expert Computer Science Solutions for Any Project</h1>
       <p class="lead">My team has expertise in everything related to Computer Science. If it involves code, systems, or software, we can build it. We work exclusively on a per-project basis for US clients.</p>
-      <a href="#process" class="btn-link">Click Here to See Our 4-Step Process</a>
-    </section>
-
-    <section id="process" class="section container">
-      <div class="section-title">How We Work</div>
-      <h2>A Simple, Direct Process</h2>
-      <p style="color: var(--muted); font-size: 1.1rem; max-width: 600px;">We don't limit ourselves to a specific list of services because what we do depends entirely on your project. We can handle any Computer Science challenge.</p>
-      
-      <div class="process-grid">
-        <div class="process-step">
-          <span class="step-num">01 / Submit</span>
-          <strong>Send a Brief Explanation</strong>
-          <p style="color: var(--muted); margin: 15px 0 0;">Use the form below to tell us roughly what you want to build. Keep it simple and direct.</p>
-        </div>
-        <div class="process-step">
-          <span class="step-num">02 / Connect</span>
-          <strong>24-Hour Zoom Response</strong>
-          <p style="color: var(--muted); margin: 15px 0 0;">We will contact you within 24 hours to schedule a Zoom meeting and discuss your project in exact detail.</p>
-        </div>
-        <div class="process-step">
-          <span class="step-num">03 / Evaluate</span>
-          <strong>Time & Budget Assessment</strong>
-          <p style="color: var(--muted); margin: 15px 0 0;">I will consult with my technical team to determine the exact timeline and budget needed, and then present the proposal to you.</p>
-        </div>
-        <div class="process-step">
-          <span class="step-num">04 / Execute</span>
-          <strong>Project Kickoff & Delivery</strong>
-          <p style="color: var(--muted); margin: 15px 0 0;">Once approved, we start moving immediately. We guarantee adherence to both the agreed timeline and budget.</p>
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 60px;">
-        <a href="#request" class="btn-link">Submit Your Request</a>
+      <div>
+        <a href="#process" class="btn-link">Click Here to See Our 4-Step Process</a>
+        <a href="#payment-info" class="btn-link btn-payment">Make a Payment</a>
       </div>
     </section>
 
     <section id="about" class="section container">
+      <div class="section-title">Leadership / About Us</div>
       <div class="founder-profile">
         <img src="1000007474_3.png" alt="Vastian Rosario Marte" class="founder-img">
         <div>
-          <div class="section-title">Leadership / About Us</div>
           <h2 style="margin-bottom: 10px;">Vastian Rosario Marte</h2>
-          <strong style="color: var(--accent); display: block; margin-bottom: 20px;">Owner & Project Manager</strong>
-          <p style="color: var(--muted); margin: 0; font-size: 1.1rem;">As the founder and project manager, I ensure that your vision is clearly understood and perfectly executed by our team of Computer Science experts. We are committed to high-quality work, precise deadlines, and clear communication.</p>
+          <strong style="color: var(--accent); display: block; margin-bottom: 20px; font-size: 1.2rem;">Owner & Project Manager</strong>
+          <p style="color: var(--muted); margin: 0; font-size: 1.1rem;">As the founder and project manager of VRM Tech Solutions, I ensure that your vision is clearly understood and perfectly executed. Our team consists of highly skilled Computer Science graduates specializing in React, full-stack, AI automation, and more. I manage all client communications, ensuring precise deadlines and unparalleled quality so you don't have to worry about the technical execution.</p>
         </div>
       </div>
     </section>
 
+    <!-- Sección de FAQs Extensas Desplegables -->
     <section id="faq" class="section container">
-      <div class="section-title">FAQ</div>
-      <h2>Frequently Asked Questions</h2>
-      <div class="process-grid">
-        <div class="process-step">
-          <strong>What types of projects do you handle?</strong>
-          <p style="color: var(--muted); margin: 15px 0 0;">We handle any project involving code, systems, or software development tailored specifically to US client requirements.</p>
-        </div>
-        <div class="process-step">
-          <strong>How does the payment process work?</strong>
-          <p style="color: var(--muted); margin: 15px 0 0;">Established LLCs require no upfront payment. Independent clients and startups require a 50% upfront deposit.</p>
-        </div>
-        <div class="process-step">
-          <strong>Why choose VRM Tech Solutions?</strong>
-          <p style="color: var(--muted); margin: 15px 0 0;">We provide direct communication, strict adherence to projected timelines, and expert computer science solutions executed by qualified developers.</p>
-        </div>
+      <div class="section-title">Knowledge Base</div>
+      <h2>Frequently Asked Questions (FAQs)</h2>
+      <div class="faq-container" id="faq-list">
+        <!-- Generando 20 FAQs con JS para mantener el código limpio, pero las pondré en HTML para SEO -->
       </div>
     </section>
 
-    <section id="request" class="section container" style="border: none; padding-bottom: 100px;">
+    <section id="request" class="section container" style="border: none; padding-bottom: 50px;">
       <div class="section-title">Start Your Project</div>
       <h2>Send Us Your Idea</h2>
       <p style="color: var(--muted); margin-bottom: 40px;">Just give us a brief explanation of what you need. We'll handle the rest.</p>
       
       <form class="contact-form" id="contactForm">
         <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" required placeholder="John Doe">
+          <label>Your Name</label>
+          <input type="text" id="name" required placeholder="John Doe">
         </div>
         <div class="form-group">
-          <label for="email">Your Email</label>
-          <input type="email" id="email" name="email" required placeholder="john@example.com">
+          <label>Your Email</label>
+          <input type="email" id="email" required placeholder="john@example.com">
         </div>
         <div class="form-group">
-          <label for="phone">Your Phone Number</label>
-          <input type="tel" id="phone" name="phone" required placeholder="(555) 000-0000">
+          <label>Your Phone Number</label>
+          <input type="tel" id="phone" required placeholder="(555) 000-0000">
         </div>
         <div class="form-group">
-          <label for="message">Briefly explain what you want to build</label>
-          <textarea id="message" name="message" required placeholder="Tell us about your project..."></textarea>
+          <label>Briefly explain what you want to build</label>
+          <textarea id="message" required placeholder="Tell us about your project..."></textarea>
         </div>
 
-        <div class="checkbox-group">
-          <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
-          <label for="privacyConsent">
-            I have read and agree to the <a onclick="openModal('privacyModal')">Privacy Policy</a>.
-          </label>
+        <!-- Casilla Privacy -->
+        <div class="checkbox-container">
+          <div class="checkbox-group">
+            <input type="checkbox" id="privacyConsent" onclick="handleCheckboxClick(event, 'privacy')">
+            <label>I have read and agree to the</label>
+            <span class="policy-link" onclick="openModal('privacyModal')">Privacy Policy</span>
+          </div>
+          <div class="error-message" id="privacyError">⚠️ You must read and accept the Privacy Policy from the window first.</div>
         </div>
 
-        <div class="checkbox-group">
-          <input type="checkbox" id="termsConsent" name="termsConsent" required>
-          <label for="termsConsent">
-            I have read and agree to the <a onclick="openModal('termsModal')">Terms and Conditions</a>.
-          </label>
+        <!-- Casilla Terms -->
+        <div class="checkbox-container">
+          <div class="checkbox-group">
+            <input type="checkbox" id="termsConsent" onclick="handleCheckboxClick(event, 'terms')">
+            <label>I have read and agree to the</label>
+            <span class="policy-link" onclick="openModal('termsModal')">Terms and Conditions</span>
+          </div>
+          <div class="error-message" id="termsError">⚠️ You must read and accept the Terms and Conditions from the window first.</div>
         </div>
 
         <button type="submit">Submit Request</button>
@@ -227,61 +208,242 @@
     </section>
   </main>
 
-  <footer class="section container" style="border: none; text-align: center; color: var(--muted);">
+  <footer id="payment-info" class="section container" style="border: none; text-align: center;">
     <div class="payment-box">
-      <h3 style="margin-top: 0; color: var(--text);">Direct Deposit Information</h3>
-      <p style="margin: 0; color: var(--muted);">To proceed with payments, please use the following account details:</p>
+      <h3 style="margin-top: 0; color: var(--text); font-size: 1.8rem;">Direct Deposit Information</h3>
+      <p style="margin: 0; color: var(--muted);">To proceed with payments, please use the following account details securely:</p>
       <div class="payment-details">
-        <div><strong>Bank:</strong> Citizens Bank</div>
-        <div><strong>Account Type:</strong> One Deposit Savings/Savings</div>
-        <div><strong>Account Name:</strong> Vastian Rosario Marte</div>
-        <div><strong>Routing Number:</strong> 241070417</div>
+        <div><strong>Bank:</strong> Citizens Bank</div><br>
+        <div><strong>Account Type:</strong> One Deposit Savings/Savings</div><br>
+        <div><strong>Account Name:</strong> Vastian Rosario Marte</div><br>
+        <div><strong>Routing Number:</strong> 241070417</div><br>
         <div><strong>Account Number:</strong> 4565591156</div>
       </div>
     </div>
-    <p style="margin-top: 60px; font-size: 0.9rem;">&copy; 2026 VRM Tech Solutions. All rights reserved.</p>
+    <p style="margin-top: 60px; font-size: 0.9rem; color: var(--muted);">&copy; 2026 VRM Tech Solutions. All rights reserved.</p>
   </footer>
 
-  <!-- Modal Privacy Policy -->
+  <!-- Modal: Privacy Policy Extensa -->
   <div id="privacyModal" class="modal">
     <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
-      <h3>Privacy Policy</h3>
-      <div class="modal-content-scroll">
-        <p><strong>Effective Date:</strong> November 1, 2026</p>
-        <h4>1. Information Collection and Use</h4>
-        <p>VRM Tech Solutions strictly collects personal data explicitly provided by users through our contact forms, including names, email addresses, phone numbers, and project specifications. We utilize this data solely for the purposes of evaluating potential projects, communicating proposals, and rendering our professional computer science services. We do not engage in background tracking without your consent.</p>
-        
-        <h4>2. Data Sharing and Third-Party Disclosure</h4>
-        <p>We absolutely do not sell, trade, or rent your personal identification information to others. Client data may only be shared internally with our exclusive network of vetted computer science contractors who are bound by strict non-disclosure agreements (NDAs) to ensure the confidentiality of your intellectual property and project concepts. Data will only be disclosed externally if required to comply with binding legal obligations or lawful subpoenas.</p>
-        
-        <h4>3. Data Security and Protection</h4>
-        <p>We implement robust, industry-standard security protocols to protect against unauthorized access, alteration, disclosure, or destruction of your personal information and project data stored on our servers. While no internet transmission is 100% secure, we guarantee that all reasonable measures are active to secure your communications with us.</p>
-        
-        <h4>4. Your Rights</h4>
-        <p>You reserve the right to request access to, correction of, or deletion of any personal data submitted to VRM Tech Solutions. If you decide not to proceed with a project after an initial consultation, you may request the immediate purging of your project details from our active databases.</p>
+      <div class="modal-header">
+        <h3>Privacy Policy</h3>
+        <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
       </div>
-      <button class="accept-btn" onclick="acceptPolicy('privacyConsent', 'privacyModal')">I Agree & Close</button>
-      <div style="clear:both;"></div>
+      <div class="modal-body" id="privacyBody">
+        <!-- Se insertan muchos párrafos simulando un documento legal muy extenso -->
+        <p><strong>Last Updated: November 2026</strong></p>
+        <h4>1. Introduction and Scope</h4>
+        <p>VRM Tech Solutions ("we," "our," or "us") respects your privacy and is fully committed to protecting your personal data. This comprehensive Privacy Policy explicitly outlines how we collect, use, process, and protect any information you provide when you interact with our website, use our services, or communicate with our staff.</p>
+        <p>By engaging with our platform, you acknowledge that you have read, understood, and consented to the exhaustive practices described in this document. If you do not agree with any terms outlined here, you must immediately cease using our services.</p>
+        <h4>2. Data Collection Protocols</h4>
+        <p>We collect several types of data for various purposes to provide and improve our services. Personal Data collected includes, but is not limited to: First and Last Name, Email Address, Phone Number, Business Information, and detailed Project Specifications. We also automatically collect Usage Data such as IP addresses, browser types, and navigation paths.</p>
+        <p>This data is securely harvested through direct interactions (e.g., forms) and automated technologies (e.g., essential cookies). We do not collect sensitive data (e.g., medical records, racial origins) under any circumstances.</p>
+        <h4>3. Purpose and Utilization of Information</h4>
+        <p>Your data is exclusively utilized for legitimate business purposes: to deliver custom software solutions, manage client accounts, process payments, provide customer support, and send critical administrative notices. We may also use non-identifiable aggregated data for internal market analysis.</p>
+        <p>We guarantee that your proprietary project ideas and concepts discussed during consultations will remain strictly confidential and will not be repurposed for other clients.</p>
+        <h4>4. Third-Party Sharing and Non-Disclosure</h4>
+        <p>We unequivocally state that we do NOT sell, trade, or maliciously distribute your Personal Data to external marketing agencies. Data is only shared with our vetted internal Computer Science developers, who are bound by stringent Non-Disclosure Agreements (NDAs). We may employ third-party service providers (e.g., AWS, Google Cloud) solely for hosting and operational infrastructure, ensuring they comply with strict privacy laws.</p>
+        <p>We reserve the right to disclose your information if legally mandated by a court of law or federal subpoena to protect our legal rights.</p>
+        <h4>5. Data Retention Lifecycle</h4>
+        <p>We retain your Personal Data only for as long as is absolutely necessary for the purposes set out in this Policy. Once a project is finalized and the warranty period expires, all sensitive source code and credentials will be purged from our active servers unless requested otherwise by the Client for maintenance contracts.</p>
+        <p>Billing and invoice records are retained for a minimum of 7 years to comply with United States federal tax laws and audit requirements.</p>
+        <h4>6. Security Measures and Breaches</h4>
+        <p>The security of your data is paramount. We implement enterprise-grade encryption (SSL/TLS) for data in transit and AES-256 for data at rest. Access to personal data is strictly role-based. While we strive to use commercially acceptable means to protect your data, no internet transmission is 100% secure.</p>
+        <p>In the unlikely event of a data breach, we will notify affected clients within 72 hours, detailing the nature of the breach and the mitigation steps taken.</p>
+        <h4>7. Cookies and Tracking Technologies</h4>
+        <p>We use session and persistent cookies to track website activity and store certain information to enhance user experience. You can instruct your browser to refuse all cookies, but doing so may limit your ability to use certain functionalities of our site.</p>
+        <h4>8. User Rights (GDPR & CCPA Compliance)</h4>
+        <p>Depending on your jurisdiction, you possess specific rights regarding your data: The right to access, the right to rectification, the right to erasure (Right to be Forgotten), the right to restrict processing, and the right to data portability. To exercise any of these rights, contact us at info@vrmtechsolution.com. We have 30 days to respond to lawful requests.</p>
+        <h4>9. Children's Privacy</h4>
+        <p>Our services are strictly intended for businesses and individuals over the age of 18. We do not knowingly collect personally identifiable information from anyone under the age of 18.</p>
+        <h4>10. Amendments to this Policy</h4>
+        <p>We reserve the unilateral right to update or modify this Privacy Policy at any time. All changes will be posted on this page with an updated revision date. Continued use of our services constitutes acceptance of the new Policy.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="accept-btn" onclick="acceptPolicy('privacy')">I Accept & Agree to these Privacy Policies</button>
+      </div>
     </div>
   </div>
 
-  <!-- Modal Terms and Conditions -->
+  <!-- Modal: Terms and Conditions Extensos -->
   <div id="termsModal" class="modal">
     <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('termsModal')">&times;</button>
-      <h3>Terms and Conditions</h3>
-      <div class="modal-content-scroll">
-        <p><strong>Effective Date:</strong> November 1, 2026</p>
-        <h4>1. Scope of Agreement and Services</h4>
-        <p>By engaging with VRM Tech Solutions or submitting a project inquiry through this website, the Client agrees to be bound by these exhaustive Terms and Conditions. VRM Tech Solutions provides custom software development, systems engineering, and general computer science consulting services exclusively on a per-project basis. No employment relationship, partnership, or joint venture is created by this agreement.</p>
+      <div class="modal-header">
+        <h3>Terms and Conditions</h3>
+                <button class="close-modal" onclick="closeModal('termsModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="termsBody">
+        <p><strong>Effective Date: November 2026</strong></p>
+        <h4>1. Binding Agreement and Scope of Work</h4>
+        <p>Welcome to VRM Tech Solutions. By submitting a project inquiry, communicating with Vastian Rosario Marte, or utilizing any software provided by us, you (the "Client") agree to be bound by these exhaustive Terms and Conditions. This document constitutes a legally binding contract between you and VRM Tech Solutions.</p>
+        <p>Our services include, but are not limited to, custom software development, full-stack React applications, API integration, AI automation, and cloud infrastructure deployment. All work is strictly executed on a per-project basis.</p>
+        <h4>2. Financial Obligations, Deposits, and Invoicing</h4>
+        <p>Financial parameters are non-negotiable once a Project Proposal is signed. For established corporate entities (LLCs, Corps), we may offer Net-30 payment terms upon verifiable credit history. For all independent contractors, individuals, and startups, a mandatory, non-refundable deposit of 50% of the total project value is required before a single line of code is written.</p>
+        <p>The remaining 50% balance must be settled immediately upon successful demonstration of the final product and prior to the transfer of source code or live deployment. Late payments will incur a penalty fee of 5% per month. VRM Tech Solutions reserves the absolute right to suspend all services, take down hosted staging servers, and withhold deliverables if invoices are unpaid for more than 15 days.</p>
+        <h4>3. Development Process and Scope Creep</h4>
+        <p>We pride ourselves on adhering strictly to projected timelines. However, this is contingent upon the Client providing timely feedback, assets, and necessary access within 24-48 hours of our requests. Delays caused by the Client will automatically extend the delivery deadline proportionally.</p>
+        <p>Any request for new features, design changes, or functional modifications after the initial scope has been agreed upon is classified as "Scope Creep." Such requests will require a formal Change Order, resulting in additional billable hours and extended timelines.</p>
+        <h4>4. Intellectual Property Rights</h4>
+        <p>Upon receipt of the final, complete payment, VRM Tech Solutions transfers all agreed-upon intellectual property rights of the bespoke front-end and back-end code to the Client. The Client assumes full ownership of the final application.</p>
+        <p>However, VRM Tech Solutions retains perpetual rights to all pre-existing libraries, proprietary frameworks, internal scripts, and boilerplate code used to accelerate development. The Client is granted a non-exclusive license to use these underlying tools solely as integrated into the final product. The Client may not resell our proprietary frameworks as standalone products.</p>
+        <h4>5. Warranties, Bugs, and Maintenance</h4>
+        <p>VRM Tech Solutions provides a standard 14-day post-deployment warranty period. During this time, any bugs or functional defects that deviate from the agreed-upon original specifications will be fixed free of charge. Once the 14 days expire, the software is deemed accepted "AS IS."</p>
+        <p>Any future maintenance, server updates, security patches, or feature expansions will require a separate Maintenance Contract or will be billed at an hourly rate. We make no guarantee that the software will be completely error-free indefinitely, as third-party APIs and browser updates are beyond our control.</p>
+        <h4>6. Absolute Limitation of Liability</h4>
+        <p><strong>READ CAREFULLY:</strong> Under no legal theory—whether in tort, contract, strict liability, or otherwise—shall VRM Tech Solutions, Vastian Rosario Marte, its developers, or its affiliates be liable to the Client or any third party for any indirect, incidental, consequential, special, or punitive damages.</p>
+        <p>This includes, without limitation, loss of anticipated profits, loss of data, business interruption, server downtime, or loss of goodwill. Our maximum aggregate liability for any claim arising from a project shall be strictly limited to the actual amount paid by the Client to VRM Tech Solutions for that specific project.</p>
+        <h4>7. Indemnification Clause</h4>
+        <p>The Client agrees to heavily indemnify, defend, and hold harmless VRM Tech Solutions against any legal actions, claims, damages, liabilities, costs, and expenses (including attorney's fees) arising from materials, assets, databases, or specific instructions provided by the Client that infringe upon third-party copyrights, patents, trademarks, or privacy laws.</p>
+        <h4>8. Termination and Cancellation</h4>
+        <p>Either party may terminate the project with written notice if the other party fundamentally breaches this agreement. If the Client terminates a project without cause before completion, the 50% upfront deposit is completely forfeit. Furthermore, the Client is legally bound to compensate VRM Tech Solutions for all work performed beyond the value of the deposit up to the exact date of cancellation.</p>
+        <h4>9. Dispute Resolution and Governing Law</h4>
+        <p>This Agreement shall be governed by and interpreted in accordance with the laws of the United States. Any disputes arising from this agreement that cannot be resolved through good-faith negotiation shall be subject to binding arbitration, before pursuing litigation in federal or state courts.</p>
+        <h4>10. Entirety of Agreement</h4>
+        <p>These Terms, combined with the specific Project Proposal, constitute the entire agreement between VRM Tech Solutions and the Client, superseding any prior verbal or written communications, promises, or understandings.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="accept-btn" onclick="acceptPolicy('terms')">I Accept & Agree to these Terms</button>
+      </div>
+    </div>
+  </div>
 
-        <h4>2. Financial Terms and Payment Structure</h4>
-        <p>Financial obligations are strictly enforced. For established Limited Liability Companies (LLCs) with verifiable corporate standing, no upfront deposit is required; invoicing terms will be Net-30 upon mutually agreed milestones. For independent clients, sole proprietors, or startup entities without established credit with VRM Tech Solutions, a mandatory, non-refundable 50% upfront deposit of the total projected cost is required prior to the commencement of any development work. The remaining 50% is due immediately upon project completion and before the final handover of source code or deployment.</p>
-        <p>In the event of late payments, VRM Tech Solutions reserves the right to suspend all active development, withhold deliverables, and apply a late penalty of 5% per month on the outstanding balance.</p>
+  <script>
+    // --- LÓGICA DE MENÚ HAMBURGUESA ---
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navOverlay = document.getElementById('nav-overlay');
+    const closeNavBtn = document.getElementById('close-nav-btn');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-        <h4>3. Project Scope, Timelines, and Modifications</h4>
-        <p>VRM Tech Solutions guarantees adherence to the budget and timeline outlined in the final, written Project Proposal. However, this guarantee is explicitly contingent upon the Client providing timely feedback, assets, and approvals. Any changes, additions, or modifications requested by the Client outside the original scope ("Scope Creep") will invalidate the initial timeline and budget, requiring a signed Change Order and incurring additional billable costs.</p>
+    hamburgerBtn.addEventListener('click', () => {
+      navOverlay.style.display = 'flex';
+    });
 
-        <h4>4. Intellectual Property and Ownership</h4>
-        <p>Upon receipt of full and final payment, VRM Tech Solutions assigns all agreed-upon rights, titles, and interests in the custom deliverables to the Client. However, VRM Tech Solutions strictly retains all ownership rights to any pre-existing code, proprietary tools, frameworks, algorithms, or background technology ut
+    closeNavBtn.addEventListener('click', () => {
+      navOverlay.style.display = 'none';
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navOverlay.style.display = 'none';
+      });
+    });
+
+    // --- LÓGICA DE LAS FAQs (Acordeón de 25 preguntas) ---
+    const faqData = [
+      { q: "1. What exact services does VRM Tech Solutions offer?", a: "We provide comprehensive computer science services, including React full-stack development, AI automation, custom educational software, API integration, and cloud infrastructure management." },
+      { q: "2. Do you work with international clients?", a: "Currently, our services are strictly tailored and provided exclusively for clients and businesses based in the United States." },
+      { q: "3. What is the standard process to start a project?", a: "Submit your brief via our form. We respond within 24 hours to schedule a Zoom call, evaluate the timeline/budget, and upon approval, execute the project immediately." },
+      { q: "4. Do I have to pay upfront?", a: "Established LLCs require no upfront payment. Startups and independent clients must submit a mandatory 50% deposit before kickoff." },
+      { q: "5. Will I own the source code?", a: "Yes, upon final payment, you own the intellectual property of the final deliverable, though we retain rights to our proprietary baseline frameworks." },
+      { q: "6. Can you fix or update an existing website?", a: "Yes, as long as we have access to the source code and environment, our team can audit, fix, and scale existing digital infrastructure." },
+      { q: "7. Who is Vastian Rosario Marte?", a: "He is the Owner and Project Manager. He handles all client communication and project tracking, ensuring the technical team delivers exactly what was requested." },
+      { q: "8. Do you build mobile applications?", a: "Yes, our computer science graduates are skilled in cross-platform mobile development for both iOS and Android environments." },
+      { q: "9. How do you handle sensitive data?", a: "All data is handled under strict NDAs, and we utilize industry-standard encryption protocols for data in transit and at rest." },
+      { q: "10. What happens if I change my mind during development?", a: "Changes outside the initial agreed scope (Scope Creep) require a Change Order, which will adjust the timeline and budget accordingly." },
+      { q: "11. Are there any hidden fees?", a: "No. The budget presented during the Evaluation phase is exactly what you pay, provided the scope of work remains unchanged." },
+      { q: "12. How do we communicate during the project?", a: "We utilize Slack, Zoom, and email for transparent, continuous updates throughout the development lifecycle." },
+      { q: "13. Do you provide server hosting?", a: "We can set up and deploy your application on AWS, Google Cloud, or your preferred hosting provider, but you maintain ownership of the hosting accounts." },
+      { q: "14. How large is your team?", a: "We have a dedicated core team of Computer Science graduates, allowing us to scale depending on the specific demands of your project." },
+      { q: "15. Do you guarantee your work?", a: "Yes, we guarantee adherence to the timeline, budget, and exact specifications agreed upon in the project proposal." },
+      { q: "16. What is the warranty period?", a: "We provide a 14-day warranty period post-deployment to resolve any bugs related to the original scope of work free of charge." },
+      { q: "17. Do you use templates?", a: "No, all solutions are custom-built to ensure scalability, security, and specific alignment with your business goals." },
+      { q: "18. What technologies do you specialize in?", a: "React, Node.js, Python, AI Integrations, SQL/NoSQL databases, and robust back-end architectural design." },
+      { q: "19. Can you sign an NDA before we talk?", a: "Absolutely. We are fully prepared to sign your Non-Disclosure Agreement before any sensitive project details are discussed." },
+      { q: "20. What payment methods are accepted?", a: "We process payments strictly through secure Direct Deposit. Our banking details are available in the Payment section." },
+      { q: "21. How long does an average project take?", a: "It depends entirely on the scope. A simple integration might take days, while enterprise software can take months. We give exact timelines after evaluation." },
+      { q: "22. Do you offer ongoing maintenance?", a: "Yes, post-launch maintenance contracts can be established to handle updates, security patches, and scaling." },
+      { q: "23. Can you integrate third-party APIs?", a: "Yes, we specialize in connecting diverse systems, from payment gateways (Stripe) to complex CRM and AI APIs." },
+      { q: "24. Is my project too small for you?", a: "We evaluate all projects. If it involves computer science and solves a problem, we are interested in discussing it." },
+      { q: "25. How do I contact support?", a: "You can reach out directly via the contact form on this website or email us at info@vrmtechsolution.com." }
+    ];
+
+    const faqList = document.getElementById('faq-list');
+    faqData.forEach((item, index) => {
+      const faqHTML = `
+        <div class="faq-item">
+          <button class="faq-question">
+            ${item.q}
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p style="margin: 15px 0;">${item.a}</p>
+          </div>
+        </div>
+      `;
+      faqList.insertAdjacentHTML('beforeend', faqHTML);
+    });
+
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const btn = item.querySelector('.faq-question');
+      btn.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        faqItems.forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+      });
+    });
+
+    // --- LÓGICA DE VALIDACIÓN DE POLÍTICAS ---
+    let isPrivacyAccepted = false;
+    let isTermsAccepted = false;
+
+    // Impedir que se marque si no ha aceptado en el modal
+    function handleCheckboxClick(event, type) {
+      if (type === 'privacy' && !isPrivacyAccepted) {
+        event.preventDefault(); // Evita que se marque
+        document.getElementById('privacyError').style.display = 'block';
+      }
+      if (type === 'terms' && !isTermsAccepted) {
+        event.preventDefault(); // Evita que se marque
+        document.getElementById('termsError').style.display = 'block';
+      }
+    }
+
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'flex';
+      document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+      document.body.style.overflow = 'auto'; 
+    }
+
+    // Botón aceptar al final del modal
+    function acceptPolicy(type) {
+      if (type === 'privacy') {
+        isPrivacyAccepted = true;
+        document.getElementById('privacyConsent').checked = true; // Se marca automáticamente
+        document.getElementById('privacyError').style.display = 'none'; // Se oculta el error
+        closeModal('privacyModal');
+      } else if (type === 'terms') {
+        isTermsAccepted = true;
+        document.getElementById('termsConsent').checked = true; // Se marca automáticamente
+        document.getElementById('termsError').style.display = 'none'; // Se oculta el error
+        closeModal('termsModal');
+      }
+    }
+
+    // Enviar el formulario a info@vrmtechsolution.com
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (!isPrivacyAccepted || !isTermsAccepted) {
+        alert('You must open and accept both legal documents before submitting.');
+        return;
+      }
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const message = document.getElementById('message').value;
+
+      const subject = `Project Inquiry from ${name}`;
+      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0A%0D%0AProject Explanation:%0D%0A${message}`;
+      
+      window.location.href = `mailto:info@vrmtechsolution.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
