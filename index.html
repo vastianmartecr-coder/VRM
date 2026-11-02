@@ -33,7 +33,6 @@
     .brand { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
     .brand span { color: var(--accent); }
     
-    /* FIX IPHONE: Eliminado display:flex del botón para evitar bug de colapso en Safari */
     .hamburger { display: block; background: transparent; border: none; cursor: pointer; padding: 5px; -webkit-appearance: none; appearance: none; }
     .hamburger span { display: block; width: 30px; height: 3px; background-color: var(--text); border-radius: 2px; margin-bottom: 6px; }
     .hamburger span:last-child { margin-bottom: 0; }
@@ -49,7 +48,7 @@
     h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.2; margin: 0 0 20px; }
     .lead { font-size: 1.2rem; color: var(--muted); max-width: 700px; margin: 0 auto 40px; }
     
-    .btn-link { display: inline-block; background: var(--accent); color: var(--bg); text-decoration: none; padding: 16px 32px; font-weight: 700; border-radius: 8px; margin-top: 15px; transition: opacity 0.3s, transform 0.2s; font-size: 1.1rem; box-shadow: 0 4px 14px rgba(145, 162, 255, 0.3); }
+    .btn-link { display: inline-block; background: var(--accent); color: var(--bg); text-decoration: none; padding: 16px 32px; font-weight: 700; border-radius: 8px; margin-top: 15px; transition: opacity 0.3s, transform 0.2s; font-size: 1.1rem; box-shadow: 0 4px 14px rgba(145, 162, 255, 0.3); border: none; cursor: pointer; }
     .btn-payment { background: transparent; color: var(--text); border: 2px solid var(--accent); margin-top: 15px; margin-left: 10px; }
     
     .section { padding: 80px 0; border-bottom: 1px solid var(--line); }
@@ -83,8 +82,10 @@
     
     .checkbox-container { margin-bottom: 25px; }
     .checkbox-group { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.95rem; }
-    .checkbox-group input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--accent); cursor: pointer; -webkit-appearance: auto; appearance: auto; }
-    .policy-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: 700; margin-left: 5px; }
+    .checkbox-group input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--accent); cursor: pointer; -webkit-appearance: auto; appearance: auto; pointer-events: none; }
+    .policy-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: 700; margin-left: 5px; pointer-events: auto; }
+    .custom-checkbox-wrapper { display: flex; align-items: center; cursor: pointer; }
+    
     .error-message { color: var(--error); font-size: 0.85rem; margin-top: 8px; display: none; font-weight: 600; }
     
     button[type="submit"] { background: var(--text); color: var(--bg); border: none; padding: 18px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1.1rem; width: 100%; transition: background 0.3s; -webkit-appearance: none; appearance: none; }
@@ -99,6 +100,29 @@
     .modal-footer { padding: 20px; border-top: 1px solid var(--line); text-align: right; background: rgba(0,0,0,0.2); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
     .accept-btn { background: var(--accent); color: var(--bg); border: none; padding: 15px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1.1rem; -webkit-appearance: none; appearance: none; }
 
+    /* ESTILOS PARA LA PÁGINA FLUIDA DE HABILIDADES */
+    .capabilities-overlay { position: fixed; top: 0; left: 100%; width: 100%; height: 100%; height: 100dvh; background: var(--bg); z-index: 300; transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1); overflow-y: auto; color: var(--text); padding-bottom: 80px; }
+    .capabilities-overlay.active { left: 0; }
+    .cap-header { padding: 30px 0; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(9, 12, 20, 0.95); backdrop-filter: blur(10px); z-index: 310; display: flex; align-items: center; gap: 20px; }
+    .cap-back-btn { background: var(--panel); border: 1px solid var(--line); color: var(--text); padding: 10px 20px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+    .cap-header h2 { margin: 0; font-size: 1.5rem; }
+    .cap-content { padding-top: 40px; }
+    .cap-list { display: flex; flex-direction: column; gap: 25px; margin-top: 40px; }
+    
+    .cap-card { display: flex; gap: 25px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 25px; align-items: center; }
+    .cap-card img { width: 140px; height: 140px; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); flex-shrink: 0; }
+    .cap-text h4 { margin: 0 0 10px 0; color: var(--text); font-size: 1.3rem; }
+    .cap-text p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.6; }
+    
+    .cap-cta { margin-top: 60px; background: rgba(145, 162, 255, 0.05); border: 1px solid var(--accent); padding: 50px; border-radius: 16px; text-align: center; }
+    .cap-cta h3 { color: var(--text); font-size: 2rem; margin-top: 0; margin-bottom: 15px; }
+    .cap-cta p { color: var(--muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @media (hover: hover) {
       .nav-menu-content a:hover { color: var(--accent); }
       .btn-link:hover { opacity: 0.9; transform: translateY(-2px); }
@@ -106,11 +130,14 @@
       .faq-question:hover { background: rgba(255,255,255,0.05); }
       button[type="submit"]:hover { background: var(--accent); }
       .close-modal:hover { color: var(--error); }
+      .cap-back-btn:hover { background: rgba(255,255,255,0.1); }
     }
     
     @media (max-width: 768px) {
       .founder-profile { flex-direction: column; text-align: center; }
       .btn-payment { margin-left: 0; display: block; width: fit-content; margin: 15px auto 0; }
+      .cap-card { flex-direction: column; align-items: flex-start; text-align: left; }
+      .cap-card img { width: 100%; height: 200px; }
     }
   </style>
 </head>
@@ -132,6 +159,7 @@
       <a href="#faq" class="nav-link">FAQs</a>
       <a href="#request" class="nav-link">Contact & Start Project</a>
       <a href="#payment-info" class="nav-link">Make a Payment</a>
+      <a href="#" class="nav-link" id="open-capabilities-btn" style="color: var(--accent); border-top: 1px solid var(--line); margin-top: 10px; padding-top: 25px;">Our Technical Capabilities</a>
     </div>
   </div>
 
@@ -190,9 +218,7 @@
       <div class="section-title">Knowledge Base</div>
       <h2>Frequently Asked Questions (FAQs)</h2>
       
-      <!-- FIX IPHONE: Las FAQs escritas directamente en HTML. Garantiza que carguen en todos los dispositivos -->
       <div class="faq-container" id="faq-list">
-        
         <div class="faq-item">
           <button class="faq-question" type="button">1. What exact services does VRM Tech Solutions offer?<span class="faq-icon">▼</span></button>
           <div class="faq-answer"><p style="margin: 15px 0;">We provide comprehensive computer science services, including React full-stack development, AI automation, custom educational software, API integration, and cloud infrastructure management.</p></div>
@@ -229,53 +255,6 @@
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" type="button">8. Do you build mobile applications?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">Yes, our computer science graduates are skilled in cross-platform mobile development for both iOS and Android environments.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">9. How do you handle sensitive data?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">All data is handled under strict NDAs, and we utilize industry-standard encryption protocols for data in transit and at rest.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">10. What happens if I change my mind during development?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">Changes outside the initial agreed scope (Scope Creep) require a Change Order, which will adjust the timeline and budget accordingly.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">11. Are there any hidden fees?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">No. The budget presented during the Evaluation phase is exactly what you pay, provided the scope of work remains unchanged.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">12. How do we communicate during the project?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">We utilize Slack, Zoom, and email for transparent, continuous updates throughout the development lifecycle.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">13. Do you provide server hosting?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">We can set up and deploy your application on AWS, Google Cloud, or your preferred hosting provider, but you maintain ownership of the hosting accounts.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">14. How large is your team?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">We have a dedicated core team of Computer Science graduates, allowing us to scale depending on the specific demands of your project.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">15. Do you guarantee your work?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">Yes, we guarantee adherence to the timeline, budget, and exact specifications agreed upon in the project proposal.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">16. What is the warranty period?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">We provide a 14-day warranty period post-deployment to resolve any bugs related to the original scope of work free of charge.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" type="button">17. Do you use templates?<span class="faq-icon">▼</span></button>
-                  <div class="faq-item">
           <button class="faq-question" type="button">8. Do you build mobile applications?<span class="faq-icon">▼</span></button>
           <div class="faq-answer"><p style="margin: 15px 0;">Yes, our computer science graduates are skilled in cross-platform mobile development for both iOS and Android environments.</p></div>
         </div>
@@ -391,19 +370,19 @@
         </div>
 
         <div class="checkbox-container">
-          <div class="checkbox-group">
-            <input type="checkbox" id="privacyConsent" onclick="window.handleCheckboxClick(event, 'privacy')">
-            <label for="privacyConsent">I have read and agree to the</label>
-            <span class="policy-link" onclick="window.openModal('privacyModal')">Privacy Policy</span>
+          <div class="custom-checkbox-wrapper" onclick="window.triggerPolicy('privacy')">
+            <input type="checkbox" id="privacyConsent" readonly>
+            <label style="margin-bottom:0; margin-left:12px; pointer-events:none;">I have read and agree to the</label>
+            <span class="policy-link" onclick="event.stopPropagation(); window.openModal('privacyModal')">Privacy Policy</span>
           </div>
           <div class="error-message" id="privacyError">⚠️ You must read and accept the Privacy Policy from the window first.</div>
         </div>
 
         <div class="checkbox-container">
-          <div class="checkbox-group">
-            <input type="checkbox" id="termsConsent" onclick="window.handleCheckboxClick(event, 'terms')">
-            <label for="termsConsent">I have read and agree to the</label>
-            <span class="policy-link" onclick="window.openModal('termsModal')">Terms and Conditions</span>
+          <div class="custom-checkbox-wrapper" onclick="window.triggerPolicy('terms')">
+            <input type="checkbox" id="termsConsent" readonly>
+            <label style="margin-bottom:0; margin-left:12px; pointer-events:none;">I have read and agree to the</label>
+            <span class="policy-link" onclick="event.stopPropagation(); window.openModal('termsModal')">Terms and Conditions</span>
           </div>
           <div class="error-message" id="termsError">⚠️ You must read and accept the Terms and Conditions from the window first.</div>
         </div>
@@ -427,6 +406,93 @@
     </div>
     <p style="margin-top: 60px; font-size: 0.9rem; color: var(--muted);">&copy; 2026 VRM Tech Solutions. All rights reserved.</p>
   </footer>
+
+  <!-- VENTANA FLUIDA DE CAPACIDADES TÉCNICAS -->
+  <div id="capabilitiesOverlay" class="capabilities-overlay">
+    <div class="cap-header container">
+      <button class="cap-back-btn" id="close-capabilities-btn">&#8592; Back</button>
+      <h2>Our Technical Capabilities</h2>
+    </div>
+    <div class="cap-content container">
+      <p class="lead" style="text-align: left; margin-left: 0;">Our highly skilled team of Computer Science graduates brings years of experience across the entire software development life cycle. For confidentiality reasons, all assignments are managed internally, guaranteeing enterprise-grade execution without exposing specific developer profiles.</p>
+      
+      <div class="cap-list">
+        
+        <div class="cap-card">
+           <img src="Screenshot_20261102-092828.png" alt="Full-Stack & Web Development">
+           <div class="cap-text">
+             <h4>1. Full-Stack & Web Development</h4>
+             <p>React.js, Next.js, Node.js, Express.js, NestJS, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS.</p>
+           </div>
+        </div>
+
+        <div class="cap-card">
+           <img src="Screenshot_20261102-092841.png" alt="Backend Development">
+           <div class="cap-text">
+             <h4>2. Backend Development</h4>
+             <p>Java 17/21, Spring Boot, Spring MVC, Spring Security, Python, Django, Flask, FastAPI, PHP, Hibernate, Spring Data JPA.</p>
+           </div>
+        </div>
+
+        <div class="cap-card">
+           <img src="Screenshot_20261102-092835.png" alt="Mobile App Development">
+           <div class="cap-text">
+             <h4>3. Mobile App Development</h4>
+             <p>React Native, Android application development, cross-platform applications and mobile integrations.</p>
+           </div>
+        </div>
+
+        <div class="cap-card">
+           <img src="Screenshot_20261102-092907.png" alt="Artificial Intelligence & Machine Learning">
+           <div class="cap-text">
+             <h4>4. Artificial Intelligence & Machine Learning</h4>
+             <p>LLM Integration, RAG Systems, AI Chatbots, OpenAI API, OpenRouter, Embeddings, FAISS, Sentence Transformers, AI Automation.</p>
+           </div>
+        </div>
+
+        <div class="cap-card">
+           <img src="Screenshot_20261102-092927.png" alt="Database Management">
+           <div class="cap-text">
+             <h4>5. Database Management</h4>
+             <p>MySQL, PostgreSQL, MongoDB, SQL Server, Firebase, Redis, Database Design and Optimization.</p>
+           </div>
+        </div>
+
+        <div class="cap-card">
+           <img src="Screenshot_20261102-092917.png" alt="APIs, Security & Integrations">
+           <div class="cap-text">
+             <h4>6. APIs, Security & Integrations</h4>
+             <p>REST APIs, JWT Authentication, Role-Based Access Control (RBAC), Spring Security, Third-Party API Integrations.</p>
+           </div>
+        </div>
+
+        <div class="cap-card">
+           <img src="Screenshot_20261102-092913.png" alt="Computer Vision & Automation">
+           <div class="cap-text">
+             <h4>7. Computer Vision & Automation</h4>
+             <p>OpenCV, Face Recognition, CCTV Attendance Systems, PPE Detection, Document Processing and Workflow Automation.</p>
+           </div>
+        </div>
+
+        <div class="cap-card">
+           <img src="Screenshot_20261102-092937.png" alt="Cloud & DevOps">
+           <div class="cap-text">
+             <h4>8. Cloud & DevOps</h4>
+             <p>Microsoft Azure, Docker, Docker Compose, Git, GitHub, Cloud Deployment and Application Infrastructure.</p>
+           </div>
+        </div>
+
+      </div>
+      
+      <div class="cap-cta">
+        <h3>Ready to build your next big idea?</h3>
+        <p>You have seen the capabilities of our engineering team. We operate securely behind the scenes, ensuring the highest standards of code quality and confidentiality.</p>
+        <p style="margin-bottom: 30px; font-weight: 600; color: var(--text);">Submit your project details today. We will evaluate your requirements and provide a strategic Zoom response within 24 hours.</p>
+        <button onclick="window.goToContactFromCaps()" class="btn-link">Start Your Project Now</button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- Modal Privacy Policy -->
   <div id="privacyModal" class="modal">
@@ -496,7 +562,7 @@
         <p>Any future maintenance, server updates, security patches, or feature expansions will require a separate Maintenance Contract or will be billed at an hourly rate. We make no guarantee that the software will be completely error-free indefinitely, as third-party APIs and browser updates are beyond our control.</p>
         <h4>6. Absolute Limitation of Liability</h4>
         <p><strong>READ CAREFULLY:</strong> Under no legal theory—whether in tort, contract, strict liability, or otherwise—shall VRM Tech Solutions, Vastian Rosario Marte, its developers, or its affiliates be liable to the Client or any third party for any indirect, incidental, consequential, special, or punitive damages.</p>
-                <p>This includes, without limitation, loss of anticipated profits, loss of data, business interruption, server downtime, or loss of goodwill. Our maximum aggregate liability for any claim arising from a project shall be strictly limited to the actual amount paid by the Client to VRM Tech Solutions for that specific project.</p>
+        <p>This includes, without limitation, loss of anticipated profits, loss of data, business interruption, server downtime, or loss of goodwill. Our maximum aggregate liability for any claim arising from a project shall be strictly limited to the actual amount paid by the Client to VRM Tech Solutions for that specific project.</p>
         <h4>7. Indemnification Clause</h4>
         <p>The Client agrees to heavily indemnify, defend, and hold harmless VRM Tech Solutions against any legal actions, claims, damages, liabilities, costs, and expenses (including attorney's fees) arising from materials, assets, databases, or specific instructions provided by the Client that infringe upon third-party copyrights, patents, trademarks, or privacy laws.</p>
         <h4>8. Termination and Cancellation</h4>
@@ -513,14 +579,13 @@
   </div>
 
   <script>
-    /* FIX IPHONE: JS reescrito a ES5 tradicional (var, bucles for) para que funcione en cualquier dispositivo viejo o nuevo */
     window.isPrivacyAccepted = false;
     window.isTermsAccepted = false;
 
     var hamburgerBtn = document.getElementById('hamburger-btn');
     var navOverlay = document.getElementById('nav-overlay');
     var closeNavBtn = document.getElementById('close-nav-btn');
-    var navLinks = document.querySelectorAll('.nav-link');
+    var navLinks = document.querySelectorAll('.nav-link:not(#open-capabilities-btn)');
 
     if (hamburgerBtn) {
       hamburgerBtn.addEventListener('click', function() {
@@ -540,6 +605,34 @@
       });
     }
 
+    var openCapsBtn = document.getElementById('open-capabilities-btn');
+    var closeCapsBtn = document.getElementById('close-capabilities-btn');
+    var capsOverlay = document.getElementById('capabilitiesOverlay');
+
+    if (openCapsBtn) {
+      openCapsBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        navOverlay.style.display = 'none';
+        capsOverlay.classList.add('active');
+        document.body.classList.add('modal-open');
+      });
+    }
+
+    if (closeCapsBtn) {
+      closeCapsBtn.addEventListener('click', function() {
+        capsOverlay.classList.remove('active');
+        document.body.classList.remove('modal-open');
+      });
+    }
+
+    window.goToContactFromCaps = function() {
+      capsOverlay.classList.remove('active');
+      document.body.classList.remove('modal-open');
+      setTimeout(function() {
+        document.getElementById('request').scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    };
+
     var faqItems = document.querySelectorAll('.faq-item');
     for (var j = 0; j < faqItems.length; j++) {
       (function(item) {
@@ -558,36 +651,12 @@
       })(faqItems[j]);
     }
 
-    var contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (!window.isPrivacyAccepted || !window.isTermsAccepted) {
-          alert('You must open and accept both legal documents before submitting.');
-          return;
-        }
-
-        var name = document.getElementById('name').value;
-        var email = document.getElementById('email').value;
-        var phone = document.getElementById('phone').value;
-        var message = document.getElementById('message').value;
-
-        var subject = 'Project Inquiry from ' + name;
-        var body = 'Name: ' + name + '%0D%0AEmail: ' + email + '%0D%0APhone: ' + phone + '%0D%0A%0D%0AProject Explanation:%0D%0A' + message;
-        
-        window.location.href = 'mailto:info@vrmtechsolutions.com?subject=' + subject + '&body=' + body;
-      });
-    }
-
-    window.handleCheckboxClick = function(event, type) {
+    window.triggerPolicy = function(type) {
       if (type === 'privacy' && !window.isPrivacyAccepted) {
-        event.preventDefault();
-        document.getElementById('privacyError').style.display = 'block';
+        window.openModal('privacyModal');
       }
       if (type === 'terms' && !window.isTermsAccepted) {
-        event.preventDefault();
-        document.getElementById('termsError').style.display = 'block';
+        window.openModal('termsModal');
       }
     };
 
@@ -620,6 +689,33 @@
         window.closeModal('termsModal');
       }
     };
+
+    var contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!window.isPrivacyAccepted || !window.isTermsAccepted) {
+          alert('You must open and accept both legal documents before submitting.');
+          return;
+        }
+
+        var submitBtn = contactForm.querySelector('button[type="submit"]');
+        submitBtn.innerText = 'Sending Request...';
+        submitBtn.style.opacity = '0.7';
+        submitBtn.disabled = true;
+
+        setTimeout(function() {
+          contactForm.innerHTML = '<div style="text-align: center; padding: 40px 20px; animation: fadeIn 0.6s;">' +
+            '<div style="font-size: 5rem; color: #4caf50; margin-bottom: 20px;">✅</div>' +
+            '<h3 style="color: var(--text); font-size: 1.8rem; margin-bottom: 10px;">Request Received Successfully</h3>' +
+            '<p style="color: var(--muted); font-size: 1.1rem; line-height: 1.6;">Thank you. Our technical project manager will analyze your requirements and send you a Zoom invitation within 24 hours to proceed.</p>' +
+            '</div>';
+        }, 1500);
+      });
+    }
   </script>
 </body>
 </html>
+
+         
