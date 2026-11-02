@@ -200,6 +200,10 @@
           <p style="color: var(--muted); margin: 15px 0 0;">Once approved, we start moving immediately. We guarantee adherence to both the agreed timeline and budget.</p>
         </div>
       </div>
+          <div style="text-align: center; margin-top: 40px;">
+      <button onclick="window.scrollToContact()" class="btn-link">Start Your Project Now</button>
+          </div>
+      
     </section>
 
     <section id="about" class="section container">
@@ -369,22 +373,26 @@
           <textarea id="message" required placeholder="Tell us about your project..."></textarea>
         </div>
 
-        <div class="checkbox-container">
-          <div class="custom-checkbox-wrapper" onclick="window.triggerPolicy('privacy')">
-            <input type="checkbox" id="privacyConsent" readonly>
-            <label style="margin-bottom:0; margin-left:12px; pointer-events:none;">I have read and agree to the</label>
-            <span class="policy-link" onclick="event.stopPropagation(); window.openModal('privacyModal')">Privacy Policy</span>
+                <div class="checkbox-container">
+          <div class="checkbox-group" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.openModal('privacyModal')">
+            <div id="customPrivacyCheck" style="width: 22px; height: 22px; border: 2px solid var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); flex-shrink: 0; transition: background 0.2s, border-color 0.2s;">
+              <span id="privacyCheckMark" style="color: #4caf50; font-size: 16px; font-weight: bold; display: none;">✓</span>
+            </div>
+            <label style="margin-bottom:0; cursor: pointer; pointer-events: none;">I have read and agree to the <span class="policy-link" style="color: var(--accent); text-decoration: underline; font-weight: 700; pointer-events: auto;">Privacy Policy</span> <span style="color: var(--accent); font-size: 0.85rem; font-weight: 600;">(Click here to view)</span></label>
           </div>
-          <div class="error-message" id="privacyError">⚠️ You must read and accept the Privacy Policy from the window first.</div>
+          <input type="checkbox" id="privacyConsent" style="display: none;" required>
+          <div class="error-message" id="privacyError" style="color: var(--error); font-size: 0.85rem; margin-top: 8px; display: none; font-weight: 600;">⚠️ You must read and accept the Privacy Policy from the window first.</div>
         </div>
 
-        <div class="checkbox-container">
-          <div class="custom-checkbox-wrapper" onclick="window.triggerPolicy('terms')">
-            <input type="checkbox" id="termsConsent" readonly>
-            <label style="margin-bottom:0; margin-left:12px; pointer-events:none;">I have read and agree to the</label>
-            <span class="policy-link" onclick="event.stopPropagation(); window.openModal('termsModal')">Terms and Conditions</span>
+        <div class="checkbox-container" style="margin-top: 20px;">
+          <div class="checkbox-group" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.openModal('termsModal')">
+            <div id="customTermsCheck" style="width: 22px; height: 22px; border: 2px solid var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); flex-shrink: 0; transition: background 0.2s, border-color 0.2s;">
+              <span id="termsCheckMark" style="color: #4caf50; font-size: 16px; font-weight: bold; display: none;">✓</span>
+            </div>
+            <label style="margin-bottom:0; cursor: pointer; pointer-events: none;">I have read and agree to the <span class="policy-link" style="color: var(--accent); text-decoration: underline; font-weight: 700; pointer-events: auto;">Terms and Conditions</span> <span style="color: var(--accent); font-size: 0.85rem; font-weight: 600;">(Click here to view)</span></label>
           </div>
-          <div class="error-message" id="termsError">⚠️ You must read and accept the Terms and Conditions from the window first.</div>
+          <input type="checkbox" id="termsConsent" style="display: none;" required>
+          <div class="error-message" id="termsError" style="color: var(--error); font-size: 0.85rem; margin-top: 8px; display: none; font-weight: 600;">⚠️ You must read and accept the Terms and Conditions from the window first.</div>
         </div>
 
         <button type="submit">Submit Request</button>
@@ -582,15 +590,19 @@
     window.isPrivacyAccepted = false;
     window.isTermsAccepted = false;
 
+    
     var hamburgerBtn = document.getElementById('hamburger-btn');
     var navOverlay = document.getElementById('nav-overlay');
     var closeNavBtn = document.getElementById('close-nav-btn');
     var navLinks = document.querySelectorAll('.nav-link:not(#open-capabilities-btn)');
 
     if (hamburgerBtn) {
-      hamburgerBtn.addEventListener('click', function() {
-        navOverlay.style.display = 'flex';
-      });
+      window.hamburgerBtn.addEventListener('click', function() {
+    window.scrollTo(0, 0);
+    navOverlay.style.display = 'flex';
+    document.body.classList.add('modal-open');
+});
+      
     }
 
     if (closeNavBtn) {
@@ -690,6 +702,13 @@
       }
     };
 
+        window.scrollToContact = function() {
+      var requestSection = document.getElementById('request');
+      if (requestSection) {
+        requestSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+    
     var contactForm = document.getElementById('contactForm');
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
