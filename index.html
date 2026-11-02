@@ -597,17 +597,9 @@
     var navLinks = document.querySelectorAll('.nav-link:not(#open-capabilities-btn)');
 
     if (hamburgerBtn) {
-      const hamburgerBtn = document.getElementById('hamburger-btn');
-const navOverlay = document.getElementById('nav-overlay');
-
-if (hamburgerBtn) {
-    hamburgerBtn.addEventListener('click', function() {
-        navOverlay.scrollTop = 0; // Fuerza el scroll arriba del overlay
-        navOverlay.style.display = 'flex';
-        document.body.classList.add('modal-open');
-    });
-    }
-    
+      window.hamburgerBtn.addEventListener('click', function() {
+    window.scrollTo(0, 0);
+    navOverlay.style.display = 'flex';
     document.body.classList.add('modal-open');
 });
       
@@ -697,25 +689,18 @@ if (hamburgerBtn) {
     };
 
     window.acceptPolicy = function(type) {
-    if (type === 'privacy') {
+      if (type === 'privacy') {
         window.isPrivacyAccepted = true;
-        const privacyCheckbox = document.getElementById('privacyConsent'); 
-        if (privacyCheckbox) {
-            privacyCheckbox.checked = true;
-            privacyCheckbox.classList.add('checked'); // Añade aquí tu clase CSS para el color verde
-        }
-        window.openModal('privacyModal'); // O la lógica para cerrar/abrir tu modal
-    } else if (type === 'terms') {
+        document.getElementById('privacyConsent').checked = true;
+        document.getElementById('privacyError').style.display = 'none';
+        window.closeModal('privacyModal');
+      } else if (type === 'terms') {
         window.isTermsAccepted = true;
-        const termsCheckbox = document.getElementById('termsConsent'); 
-        if (termsCheckbox) {
-            termsCheckbox.checked = true;
-            termsCheckbox.classList.add('checked'); // Añade aquí tu clase CSS para el color verde
-        }
-        window.openModal('termsModal'); // O la lógica para cerrar/abrir tu modal
-    }
-};
-    
+        document.getElementById('termsConsent').checked = true;
+        document.getElementById('termsError').style.display = 'none';
+        window.closeModal('termsModal');
+      }
+    };
 
         window.scrollToContact = function() {
       var requestSection = document.getElementById('request');
