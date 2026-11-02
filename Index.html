@@ -33,8 +33,10 @@
     .brand { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
     .brand span { color: var(--accent); }
     
-    .hamburger { display: flex; flex-direction: column; gap: 6px; background: transparent; border: none; cursor: pointer; padding: 5px; -webkit-appearance: none; appearance: none; }
-    .hamburger span { display: block; width: 30px; height: 3px; background-color: var(--text); border-radius: 2px; }
+    /* FIX IPHONE: Eliminado display:flex del botón para evitar bug de colapso en Safari */
+    .hamburger { display: block; background: transparent; border: none; cursor: pointer; padding: 5px; -webkit-appearance: none; appearance: none; }
+    .hamburger span { display: block; width: 30px; height: 3px; background-color: var(--text); border-radius: 2px; margin-bottom: 6px; }
+    .hamburger span:last-child { margin-bottom: 0; }
     
     .nav-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; height: 100dvh; background: rgba(9, 12, 20, 0.95); z-index: 200; justify-content: center; align-items: center; }
     .nav-menu-overlay.active { display: flex; }
@@ -187,8 +189,181 @@
     <section id="faq" class="section container">
       <div class="section-title">Knowledge Base</div>
       <h2>Frequently Asked Questions (FAQs)</h2>
+      
+      <!-- FIX IPHONE: Las FAQs escritas directamente en HTML. Garantiza que carguen en todos los dispositivos -->
       <div class="faq-container" id="faq-list">
-        <!-- Generado dinámicamente por JS -->
+        
+        <div class="faq-item">
+          <button class="faq-question" type="button">1. What exact services does VRM Tech Solutions offer?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We provide comprehensive computer science services, including React full-stack development, AI automation, custom educational software, API integration, and cloud infrastructure management.</p></div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="faq-question" type="button">2. Do you work with international clients?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Currently, our services are strictly tailored and provided exclusively for clients and businesses based in the United States.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">3. What is the standard process to start a project?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Submit your brief via our form. We respond within 24 hours to schedule a Zoom call, evaluate the timeline/budget, and upon approval, execute the project immediately.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">4. Do I have to pay upfront?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Established LLCs require no upfront payment. Startups and independent clients must submit a mandatory 50% deposit before kickoff.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">5. Will I own the source code?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Yes, upon final payment, you own the intellectual property of the final deliverable, though we retain rights to our proprietary baseline frameworks.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">6. Can you fix or update an existing website?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Yes, as long as we have access to the source code and environment, our team can audit, fix, and scale existing digital infrastructure.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">7. Who is Vastian Rosario Marte?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">He is the Owner and Project Manager. He handles all client communication and project tracking, ensuring the technical team delivers exactly what was requested.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">8. Do you build mobile applications?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Yes, our computer science graduates are skilled in cross-platform mobile development for both iOS and Android environments.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">9. How do you handle sensitive data?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">All data is handled under strict NDAs, and we utilize industry-standard encryption protocols for data in transit and at rest.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">10. What happens if I change my mind during development?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Changes outside the initial agreed scope (Scope Creep) require a Change Order, which will adjust the timeline and budget accordingly.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">11. Are there any hidden fees?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">No. The budget presented during the Evaluation phase is exactly what you pay, provided the scope of work remains unchanged.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">12. How do we communicate during the project?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We utilize Slack, Zoom, and email for transparent, continuous updates throughout the development lifecycle.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">13. Do you provide server hosting?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We can set up and deploy your application on AWS, Google Cloud, or your preferred hosting provider, but you maintain ownership of the hosting accounts.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">14. How large is your team?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We have a dedicated core team of Computer Science graduates, allowing us to scale depending on the specific demands of your project.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">15. Do you guarantee your work?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Yes, we guarantee adherence to the timeline, budget, and exact specifications agreed upon in the project proposal.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">16. What is the warranty period?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We provide a 14-day warranty period post-deployment to resolve any bugs related to the original scope of work free of charge.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">17. Do you use templates?<span class="faq-icon">▼</span></button>
+                  <div class="faq-item">
+          <button class="faq-question" type="button">8. Do you build mobile applications?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Yes, our computer science graduates are skilled in cross-platform mobile development for both iOS and Android environments.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">9. How do you handle sensitive data?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">All data is handled under strict NDAs, and we utilize industry-standard encryption protocols for data in transit and at rest.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">10. What happens if I change my mind during development?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Changes outside the initial agreed scope (Scope Creep) require a Change Order, which will adjust the timeline and budget accordingly.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">11. Are there any hidden fees?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">No. The budget presented during the Evaluation phase is exactly what you pay, provided the scope of work remains unchanged.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">12. How do we communicate during the project?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We utilize Slack, Zoom, and email for transparent, continuous updates throughout the development lifecycle.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">13. Do you provide server hosting?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We can set up and deploy your application on AWS, Google Cloud, or your preferred hosting provider, but you maintain ownership of the hosting accounts.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">14. How large is your team?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We have a dedicated core team of Computer Science graduates, allowing us to scale depending on the specific demands of your project.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">15. Do you guarantee your work?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Yes, we guarantee adherence to the timeline, budget, and exact specifications agreed upon in the project proposal.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">16. What is the warranty period?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We provide a 14-day warranty period post-deployment to resolve any bugs related to the original scope of work free of charge.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">17. Do you use templates?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">No, all solutions are custom-built to ensure scalability, security, and specific alignment with your business goals.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">18. What technologies do you specialize in?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">React, Node.js, Python, AI Integrations, SQL/NoSQL databases, and robust back-end architectural design.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">19. Can you sign an NDA before we talk?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Absolutely. We are fully prepared to sign your Non-Disclosure Agreement before any sensitive project details are discussed.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">20. What payment methods are accepted?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We process payments strictly through secure Direct Deposit. Our banking details are available in the Payment section.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">21. How long does an average project take?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">It depends entirely on the scope. A simple integration might take days, while enterprise software can take months. We give exact timelines after evaluation.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">22. Do you offer ongoing maintenance?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Yes, post-launch maintenance contracts can be established to handle updates, security patches, and scaling.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">23. Can you integrate third-party APIs?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">Yes, we specialize in connecting diverse systems, from payment gateways (Stripe) to complex CRM and AI APIs.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">24. Is my project too small for you?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">We evaluate all projects. If it involves computer science and solves a problem, we are interested in discussing it.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">25. How do I contact support?<span class="faq-icon">▼</span></button>
+          <div class="faq-answer"><p style="margin: 15px 0;">You can reach out directly via the contact form on this website or email us at info@vrmtechsolution.com.</p></div>
+        </div>
       </div>
     </section>
 
@@ -276,7 +451,7 @@
         <p>We reserve the right to disclose your information if legally mandated by a court of law or federal subpoena to protect our legal rights.</p>
         <h4>5. Data Retention Lifecycle</h4>
         <p>We retain your Personal Data only for as long as is absolutely necessary for the purposes set out in this Policy. Once a project is finalized and the warranty period expires, all sensitive source code and credentials will be purged from our active servers unless requested otherwise by the Client for maintenance contracts.</p>
-                <p>Billing and invoice records are retained for a minimum of 7 years to comply with United States federal tax laws and audit requirements.</p>
+        <p>Billing and invoice records are retained for a minimum of 7 years to comply with United States federal tax laws and audit requirements.</p>
         <h4>6. Security Measures and Breaches</h4>
         <p>The security of your data is paramount. We implement enterprise-grade encryption (SSL/TLS) for data in transit and AES-256 for data at rest. Access to personal data is strictly role-based. While we strive to use commercially acceptable means to protect your data, no internet transmission is 100% secure.</p>
         <p>In the unlikely event of a data breach, we will notify affected clients within 72 hours, detailing the nature of the breach and the mitigation steps taken.</p>
@@ -321,7 +496,7 @@
         <p>Any future maintenance, server updates, security patches, or feature expansions will require a separate Maintenance Contract or will be billed at an hourly rate. We make no guarantee that the software will be completely error-free indefinitely, as third-party APIs and browser updates are beyond our control.</p>
         <h4>6. Absolute Limitation of Liability</h4>
         <p><strong>READ CAREFULLY:</strong> Under no legal theory—whether in tort, contract, strict liability, or otherwise—shall VRM Tech Solutions, Vastian Rosario Marte, its developers, or its affiliates be liable to the Client or any third party for any indirect, incidental, consequential, special, or punitive damages.</p>
-        <p>This includes, without limitation, loss of anticipated profits, loss of data, business interruption, server downtime, or loss of goodwill. Our maximum aggregate liability for any claim arising from a project shall be strictly limited to the actual amount paid by the Client to VRM Tech Solutions for that specific project.</p>
+                <p>This includes, without limitation, loss of anticipated profits, loss of data, business interruption, server downtime, or loss of goodwill. Our maximum aggregate liability for any claim arising from a project shall be strictly limited to the actual amount paid by the Client to VRM Tech Solutions for that specific project.</p>
         <h4>7. Indemnification Clause</h4>
         <p>The Client agrees to heavily indemnify, defend, and hold harmless VRM Tech Solutions against any legal actions, claims, damages, liabilities, costs, and expenses (including attorney's fees) arising from materials, assets, databases, or specific instructions provided by the Client that infringe upon third-party copyrights, patents, trademarks, or privacy laws.</p>
         <h4>8. Termination and Cancellation</h4>
@@ -338,106 +513,73 @@
   </div>
 
   <script>
-    // Variables globales explícitas en el objeto window para evitar problemas de alcance en iOS
+    /* FIX IPHONE: JS reescrito a ES5 tradicional (var, bucles for) para que funcione en cualquier dispositivo viejo o nuevo */
     window.isPrivacyAccepted = false;
     window.isTermsAccepted = false;
 
-    // Elementos del menú
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const navOverlay = document.getElementById('nav-overlay');
-    const closeNavBtn = document.getElementById('close-nav-btn');
-    const navLinks = document.querySelectorAll('.nav-link');
+    var hamburgerBtn = document.getElementById('hamburger-btn');
+    var navOverlay = document.getElementById('nav-overlay');
+    var closeNavBtn = document.getElementById('close-nav-btn');
+    var navLinks = document.querySelectorAll('.nav-link');
 
-    hamburgerBtn.addEventListener('click', function() {
-      navOverlay.style.display = 'flex';
-    });
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', function() {
+        navOverlay.style.display = 'flex';
+      });
+    }
 
-    closeNavBtn.addEventListener('click', function() {
-      navOverlay.style.display = 'none';
-    });
-
-    navLinks.forEach(function(link) {
-      link.addEventListener('click', function() {
+    if (closeNavBtn) {
+      closeNavBtn.addEventListener('click', function() {
         navOverlay.style.display = 'none';
       });
-    });
+    }
 
-    // Inserción de FAQs
-    const faqData = [
-      { q: "1. What exact services does VRM Tech Solutions offer?", a: "We provide comprehensive computer science services, including React full-stack development, AI automation, custom educational software, API integration, and cloud infrastructure management." },
-      { q: "2. Do you work with international clients?", a: "Currently, our services are strictly tailored and provided exclusively for clients and businesses based in the United States." },
-      { q: "3. What is the standard process to start a project?", a: "Submit your brief via our form. We respond within 24 hours to schedule a Zoom call, evaluate the timeline/budget, and upon approval, execute the project immediately." },
-      { q: "4. Do I have to pay upfront?", a: "Established LLCs require no upfront payment. Startups and independent clients must submit a mandatory 50% deposit before kickoff." },
-      { q: "5. Will I own the source code?", a: "Yes, upon final payment, you own the intellectual property of the final deliverable, though we retain rights to our proprietary baseline frameworks." },
-      { q: "6. Can you fix or update an existing website?", a: "Yes, as long as we have access to the source code and environment, our team can audit, fix, and scale existing digital infrastructure." },
-      { q: "7. Who is Vastian Rosario Marte?", a: "He is the Owner and Project Manager. He handles all client communication and project tracking, ensuring the technical team delivers exactly what was requested." },
-      { q: "8. Do you build mobile applications?", a: "Yes, our computer science graduates are skilled in cross-platform mobile development for both iOS and Android environments." },
-      { q: "9. How do you handle sensitive data?", a: "All data is handled under strict NDAs, and we utilize industry-standard encryption protocols for data in transit and at rest." },
-      { q: "10. What happens if I change my mind during development?", a: "Changes outside the initial agreed scope (Scope Creep) require a Change Order, which will adjust the timeline and budget accordingly." },
-      { q: "11. Are there any hidden fees?", a: "No. The budget presented during the Evaluation phase is exactly what you pay, provided the scope of work remains unchanged." },
-      { q: "12. How do we communicate during the project?", a: "We utilize Slack, Zoom, and email for transparent, continuous updates throughout the development lifecycle." },
-      { q: "13. Do you provide server hosting?", a: "We can set up and deploy your application on AWS, Google Cloud, or your preferred hosting provider, but you maintain ownership of the hosting accounts." },
-      { q: "14. How large is your team?", a: "We have a dedicated core team of Computer Science graduates, allowing us to scale depending on the specific demands of your project." },
-      { q: "15. Do you guarantee your work?", a: "Yes, we guarantee adherence to the timeline, budget, and exact specifications agreed upon in the project proposal." },
-      { q: "16. What is the warranty period?", a: "We provide a 14-day warranty period post-deployment to resolve any bugs related to the original scope of work free of charge." },
-      { q: "17. Do you use templates?", a: "No, all solutions are custom-built to ensure scalability, security, and specific alignment with your business goals." },
-      { q: "18. What technologies do you specialize in?", a: "React, Node.js, Python, AI Integrations, SQL/NoSQL databases, and robust back-end architectural design." },
-      { q: "19. Can you sign an NDA before we talk?", a: "Absolutely. We are fully prepared to sign your Non-Disclosure Agreement before any sensitive project details are discussed." },
-      { q: "20. What payment methods are accepted?", a: "We process payments strictly through secure Direct Deposit. Our banking details are available in the Payment section." },
-      { q: "21. How long does an average project take?", a: "It depends entirely on the scope. A simple integration might take days, while enterprise software can take months. We give exact timelines after evaluation." },
-      { q: "22. Do you offer ongoing maintenance?", a: "Yes, post-launch maintenance contracts can be established to handle updates, security patches, and scaling." },
-      { q: "23. Can you integrate third-party APIs?", a: "Yes, we specialize in connecting diverse systems, from payment gateways (Stripe) to complex CRM and AI APIs." },
-      { q: "24. Is my project too small for you?", a: "We evaluate all projects. If it involves computer science and solves a problem, we are interested in discussing it." },
-      { q: "25. How do I contact support?", a: "You can reach out directly via the contact form on this website or email us at info@vrmtechsolution.com." }
-    ];
-
-    const faqList = document.getElementById('faq-list');
-    faqData.forEach(function(item) {
-      const faqHTML = `
-        <div class="faq-item">
-          <button class="faq-question" type="button">
-            ${item.q}
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-answer">
-            <p style="margin: 15px 0;">${item.a}</p>
-          </div>
-        </div>
-      `;
-      faqList.insertAdjacentHTML('beforeend', faqHTML);
-    });
-
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(function(item) {
-      const btn = item.querySelector('.faq-question');
-      btn.addEventListener('click', function() {
-        const isActive = item.classList.contains('active');
-        faqItems.forEach(function(i) { i.classList.remove('active'); });
-        if (!isActive) item.classList.add('active');
+    for (var i = 0; i < navLinks.length; i++) {
+      navLinks[i].addEventListener('click', function() {
+        navOverlay.style.display = 'none';
       });
-    });
+    }
 
-    // Envío del formulario
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      if (!window.isPrivacyAccepted || !window.isTermsAccepted) {
-        alert('You must open and accept both legal documents before submitting.');
-        return;
-      }
+    var faqItems = document.querySelectorAll('.faq-item');
+    for (var j = 0; j < faqItems.length; j++) {
+      (function(item) {
+        var btn = item.querySelector('.faq-question');
+        if (btn) {
+          btn.addEventListener('click', function() {
+            var isActive = item.classList.contains('active');
+            for (var k = 0; k < faqItems.length; k++) {
+              faqItems[k].classList.remove('active');
+            }
+            if (!isActive) {
+              item.classList.add('active');
+            }
+          });
+        }
+      })(faqItems[j]);
+    }
 
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const message = document.getElementById('message').value;
+    var contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!window.isPrivacyAccepted || !window.isTermsAccepted) {
+          alert('You must open and accept both legal documents before submitting.');
+          return;
+        }
 
-      const subject = `Project Inquiry from ${name}`;
-      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0A%0D%0AProject Explanation:%0D%0A${message}`;
-      
-      window.location.href = `mailto:info@vrmtechsolution.com?subject=${subject}&body=${body}`;
-    });
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+        var message = document.getElementById('message').value;
 
-    // Funciones globales anexadas a window para los eventos onclick en línea
+        var subject = 'Project Inquiry from ' + name;
+        var body = 'Name: ' + name + '%0D%0AEmail: ' + email + '%0D%0APhone: ' + phone + '%0D%0A%0D%0AProject Explanation:%0D%0A' + message;
+        
+        window.location.href = 'mailto:info@vrmtechsolution.com?subject=' + subject + '&body=' + body;
+      });
+    }
+
     window.handleCheckboxClick = function(event, type) {
       if (type === 'privacy' && !window.isPrivacyAccepted) {
         event.preventDefault();
@@ -450,13 +592,19 @@
     };
 
     window.openModal = function(modalId) {
-      document.getElementById(modalId).style.display = 'flex';
-      document.body.classList.add('modal-open');
+      var m = document.getElementById(modalId);
+      if (m) {
+        m.style.display = 'flex';
+        document.body.classList.add('modal-open');
+      }
     };
 
     window.closeModal = function(modalId) {
-      document.getElementById(modalId).style.display = 'none';
-      document.body.classList.remove('modal-open');
+      var m = document.getElementById(modalId);
+      if (m) {
+        m.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      }
     };
 
     window.acceptPolicy = function(type) {
