@@ -81,10 +81,9 @@
     textarea { height: 180px; resize: vertical; }
     
     .checkbox-container { margin-bottom: 25px; }
-    .checkbox-group { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.95rem; }
+    .checkbox-group { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.95rem; cursor: pointer; }
     .checkbox-group input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--accent); cursor: pointer; -webkit-appearance: auto; appearance: auto; pointer-events: none; }
     .policy-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: 700; margin-left: 5px; pointer-events: auto; }
-    .custom-checkbox-wrapper { display: flex; align-items: center; cursor: pointer; }
     
     .error-message { color: var(--error); font-size: 0.85rem; margin-top: 8px; display: none; font-weight: 600; }
     
@@ -200,10 +199,9 @@
           <p style="color: var(--muted); margin: 15px 0 0;">Once approved, we start moving immediately. We guarantee adherence to both the agreed timeline and budget.</p>
         </div>
       </div>
-          <div style="text-align: center; margin-top: 40px;">
-      <button onclick="window.scrollToContact()" class="btn-link">Start Your Project Now</button>
-          </div>
-      
+      <div style="text-align: center; margin-top: 40px;">
+        <button onclick="window.scrollToContact()" class="btn-link">Start Your Project Now</button>
+      </div>
     </section>
 
     <section id="about" class="section container">
@@ -263,12 +261,7 @@
           <div class="faq-answer"><p style="margin: 15px 0;">Yes, our computer science graduates are skilled in cross-platform mobile development for both iOS and Android environments.</p></div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-question" type="button">9. How do you handle sensitive data?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">All data is handled under strict NDAs, and we utilize industry-standard encryption protocols for data in transit and at rest.</p></div>
-        </div>
-
-        <div class="faq-item">
+                <div class="faq-item">
           <button class="faq-question" type="button">10. What happens if I change my mind during development?<span class="faq-icon">▼</span></button>
           <div class="faq-answer"><p style="margin: 15px 0;">Changes outside the initial agreed scope (Scope Creep) require a Change Order, which will adjust the timeline and budget accordingly.</p></div>
         </div>
@@ -373,26 +366,20 @@
           <textarea id="message" required placeholder="Tell us about your project..."></textarea>
         </div>
 
-                <div class="checkbox-container">
-          <div class="checkbox-group" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.openModal('privacyModal')">
-            <div id="customPrivacyCheck" style="width: 22px; height: 22px; border: 2px solid var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); flex-shrink: 0; transition: background 0.2s, border-color 0.2s;">
-              <span id="privacyCheckMark" style="color: #4caf50; font-size: 16px; font-weight: bold; display: none;">✓</span>
-            </div>
-            <label style="margin-bottom:0; cursor: pointer; pointer-events: none;">I have read and agree to the <span class="policy-link" style="color: var(--accent); text-decoration: underline; font-weight: 700; pointer-events: auto;">Privacy Policy</span> <span style="color: var(--accent); font-size: 0.85rem; font-weight: 600;">(Click here to view)</span></label>
+        <div class="checkbox-container">
+          <div class="checkbox-group" onclick="window.openModal('privacyModal')">
+            <input type="checkbox" id="privacyConsent">
+            <label style="margin-bottom:0;">I have read and agree to the <span class="policy-link" onclick="event.stopPropagation(); window.openModal('privacyModal');">Privacy Policy</span></label>
           </div>
-          <input type="checkbox" id="privacyConsent" style="display: none;" required>
-          <div class="error-message" id="privacyError" style="color: var(--error); font-size: 0.85rem; margin-top: 8px; display: none; font-weight: 600;">⚠️ You must read and accept the Privacy Policy from the window first.</div>
+          <div class="error-message" id="privacyError">⚠️ You must read and accept the Privacy Policy before continuing.</div>
         </div>
 
-        <div class="checkbox-container" style="margin-top: 20px;">
-          <div class="checkbox-group" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.openModal('termsModal')">
-            <div id="customTermsCheck" style="width: 22px; height: 22px; border: 2px solid var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); flex-shrink: 0; transition: background 0.2s, border-color 0.2s;">
-              <span id="termsCheckMark" style="color: #4caf50; font-size: 16px; font-weight: bold; display: none;">✓</span>
-            </div>
-            <label style="margin-bottom:0; cursor: pointer; pointer-events: none;">I have read and agree to the <span class="policy-link" style="color: var(--accent); text-decoration: underline; font-weight: 700; pointer-events: auto;">Terms and Conditions</span> <span style="color: var(--accent); font-size: 0.85rem; font-weight: 600;">(Click here to view)</span></label>
+        <div class="checkbox-container">
+          <div class="checkbox-group" onclick="window.openModal('termsModal')">
+            <input type="checkbox" id="termsConsent">
+            <label style="margin-bottom:0;">I have read and agree to the <span class="policy-link" onclick="event.stopPropagation(); window.openModal('termsModal');">Terms and Conditions</span></label>
           </div>
-          <input type="checkbox" id="termsConsent" style="display: none;" required>
-          <div class="error-message" id="termsError" style="color: var(--error); font-size: 0.85rem; margin-top: 8px; display: none; font-weight: 600;">⚠️ You must read and accept the Terms and Conditions from the window first.</div>
+          <div class="error-message" id="termsError">⚠️ You must read and accept the Terms and Conditions before continuing.</div>
         </div>
 
         <button type="submit">Submit Request</button>
@@ -544,7 +531,7 @@
     </div>
   </div>
 
-  <!-- Modal Terms and Conditions -->
+    <!-- Modal Terms and Conditions -->
   <div id="termsModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -590,30 +577,30 @@
     window.isPrivacyAccepted = false;
     window.isTermsAccepted = false;
 
-    
     var hamburgerBtn = document.getElementById('hamburger-btn');
     var navOverlay = document.getElementById('nav-overlay');
     var closeNavBtn = document.getElementById('close-nav-btn');
     var navLinks = document.querySelectorAll('.nav-link:not(#open-capabilities-btn)');
 
     if (hamburgerBtn) {
-      window.hamburgerBtn.addEventListener('click', function() {
-    window.scrollTo(0, 0);
-    navOverlay.style.display = 'flex';
-    document.body.classList.add('modal-open');
-});
-      
+      hamburgerBtn.addEventListener('click', function() {
+        window.scrollTo(0, 0);
+        navOverlay.style.display = 'flex';
+        document.body.classList.add('modal-open');
+      });
     }
 
     if (closeNavBtn) {
       closeNavBtn.addEventListener('click', function() {
         navOverlay.style.display = 'none';
+        document.body.classList.remove('modal-open');
       });
     }
 
     for (var i = 0; i < navLinks.length; i++) {
       navLinks[i].addEventListener('click', function() {
         navOverlay.style.display = 'none';
+        document.body.classList.remove('modal-open');
       });
     }
 
@@ -625,6 +612,7 @@
       openCapsBtn.addEventListener('click', function(e) {
         e.preventDefault();
         navOverlay.style.display = 'none';
+        capsOverlay.scrollTop = 0;
         capsOverlay.classList.add('active');
         document.body.classList.add('modal-open');
       });
@@ -663,15 +651,6 @@
       })(faqItems[j]);
     }
 
-    window.triggerPolicy = function(type) {
-      if (type === 'privacy' && !window.isPrivacyAccepted) {
-        window.openModal('privacyModal');
-      }
-      if (type === 'terms' && !window.isTermsAccepted) {
-        window.openModal('termsModal');
-      }
-    };
-
     window.openModal = function(modalId) {
       var m = document.getElementById(modalId);
       if (m) {
@@ -691,18 +670,42 @@
     window.acceptPolicy = function(type) {
       if (type === 'privacy') {
         window.isPrivacyAccepted = true;
-        document.getElementById('privacyConsent').checked = true;
-        document.getElementById('privacyError').style.display = 'none';
+        var privCheck = document.getElementById('privacyConsent');
+        if (privCheck) privCheck.checked = true;
+        var privErr = document.getElementById('privacyError');
+        if (privErr) privErr.style.display = 'none';
         window.closeModal('privacyModal');
       } else if (type === 'terms') {
         window.isTermsAccepted = true;
-        document.getElementById('termsConsent').checked = true;
-        document.getElementById('termsError').style.display = 'none';
+        var termsCheck = document.getElementById('termsConsent');
+        if (termsCheck) termsCheck.checked = true;
+        var termsErr = document.getElementById('termsError');
+        if (termsErr) termsErr.style.display = 'none';
         window.closeModal('termsModal');
       }
     };
 
-        window.scrollToContact = function() {
+    var privacyGroup = document.querySelector('#privacyConsent').closest('.checkbox-container');
+    if (privacyGroup) {
+      privacyGroup.addEventListener('click', function(e) {
+        if (!window.isPrivacyAccepted) {
+          e.preventDefault();
+          window.openModal('privacyModal');
+        }
+      });
+    }
+
+    var termsGroup = document.querySelector('#termsConsent').closest('.checkbox-container');
+    if (termsGroup) {
+      termsGroup.addEventListener('click', function(e) {
+        if (!window.isTermsAccepted) {
+          e.preventDefault();
+          window.openModal('termsModal');
+        }
+      });
+    }
+
+    window.scrollToContact = function() {
       var requestSection = document.getElementById('request');
       if (requestSection) {
         requestSection.scrollIntoView({ behavior: 'smooth' });
@@ -714,8 +717,23 @@
       contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        if (!window.isPrivacyAccepted || !window.isTermsAccepted) {
-          alert('You must open and accept both legal documents before submitting.');
+        var hasError = false;
+
+        if (!window.isPrivacyAccepted) {
+          document.getElementById('privacyError').style.display = 'block';
+          hasError = true;
+        } else {
+          document.getElementById('privacyError').style.display = 'none';
+        }
+
+        if (!window.isTermsAccepted) {
+          document.getElementById('termsError').style.display = 'block';
+          hasError = true;
+        } else {
+          document.getElementById('termsError').style.display = 'none';
+        }
+
+        if (hasError) {
           return;
         }
 
@@ -737,4 +755,6 @@
 </body>
 </html>
 
-         
+  
+
+        
