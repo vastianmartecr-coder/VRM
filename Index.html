@@ -24,7 +24,6 @@
     html { scroll-behavior: smooth; }
     body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
     
-    /* Solución para bloquear el scroll en iOS cuando hay un modal abierto */
     body.modal-open { overflow: hidden; }
 
     .container { width: min(var(--max), 100% - 40px); margin: 0 auto; }
@@ -37,7 +36,6 @@
     .hamburger { display: flex; flex-direction: column; gap: 6px; background: transparent; border: none; cursor: pointer; padding: 5px; -webkit-appearance: none; appearance: none; }
     .hamburger span { display: block; width: 30px; height: 3px; background-color: var(--text); border-radius: 2px; }
     
-    /* Adaptación para iOS Safari dvh */
     .nav-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; height: 100dvh; background: rgba(9, 12, 20, 0.95); z-index: 200; justify-content: center; align-items: center; }
     .nav-menu-overlay.active { display: flex; }
     .nav-menu-content { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 40px; width: 90%; max-width: 400px; text-align: center; position: relative; }
@@ -78,7 +76,6 @@
     .form-group { margin-bottom: 25px; }
     label { display: block; margin-bottom: 10px; color: var(--muted); font-size: 0.95rem; cursor: pointer; }
     
-    /* Solución de zoom automático y estilos nativos en iOS */
     input, textarea { width: 100%; padding: 16px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--line); color: white; border-radius: 8px; font-family: inherit; font-size: 16px !important; -webkit-appearance: none; appearance: none; }
     textarea { height: 180px; resize: vertical; }
     
@@ -90,7 +87,6 @@
     
     button[type="submit"] { background: var(--text); color: var(--bg); border: none; padding: 18px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1.1rem; width: 100%; transition: background 0.3s; -webkit-appearance: none; appearance: none; }
     
-    /* Adaptación para iOS Safari dvh en modales */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; height: 100dvh; background: rgba(9, 12, 20, 0.95); z-index: 999; justify-content: center; align-items: center; padding: 20px; }
     .modal-content { background: var(--panel); width: 100%; max-width: 800px; height: 85vh; display: flex; flex-direction: column; border-radius: 12px; border: 1px solid var(--line); position: relative; }
     .modal-header { padding: 25px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
@@ -101,7 +97,6 @@
     .modal-footer { padding: 20px; border-top: 1px solid var(--line); text-align: right; background: rgba(0,0,0,0.2); border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
     .accept-btn { background: var(--accent); color: var(--bg); border: none; padding: 15px 30px; font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 1.1rem; -webkit-appearance: none; appearance: none; }
 
-    /* Previene el "doble toque" en dispositivos táctiles asegurando que hover solo aplique a cursores */
     @media (hover: hover) {
       .nav-menu-content a:hover { color: var(--accent); }
       .btn-link:hover { opacity: 0.9; transform: translateY(-2px); }
@@ -222,18 +217,18 @@
 
         <div class="checkbox-container">
           <div class="checkbox-group">
-            <input type="checkbox" id="privacyConsent" onclick="handleCheckboxClick(event, 'privacy')">
+            <input type="checkbox" id="privacyConsent" onclick="window.handleCheckboxClick(event, 'privacy')">
             <label for="privacyConsent">I have read and agree to the</label>
-            <span class="policy-link" onclick="openModal('privacyModal')">Privacy Policy</span>
+            <span class="policy-link" onclick="window.openModal('privacyModal')">Privacy Policy</span>
           </div>
           <div class="error-message" id="privacyError">⚠️ You must read and accept the Privacy Policy from the window first.</div>
         </div>
 
         <div class="checkbox-container">
           <div class="checkbox-group">
-            <input type="checkbox" id="termsConsent" onclick="handleCheckboxClick(event, 'terms')">
+            <input type="checkbox" id="termsConsent" onclick="window.handleCheckboxClick(event, 'terms')">
             <label for="termsConsent">I have read and agree to the</label>
-            <span class="policy-link" onclick="openModal('termsModal')">Terms and Conditions</span>
+            <span class="policy-link" onclick="window.openModal('termsModal')">Terms and Conditions</span>
           </div>
           <div class="error-message" id="termsError">⚠️ You must read and accept the Terms and Conditions from the window first.</div>
         </div>
@@ -263,7 +258,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h3>Privacy Policy</h3>
-        <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
+        <button class="close-modal" onclick="window.closeModal('privacyModal')">&times;</button>
       </div>
       <div class="modal-body" id="privacyBody">
         <p><strong>Last Updated: November 2026</strong></p>
@@ -280,8 +275,8 @@
         <p>We unequivocally state that we do NOT sell, trade, or maliciously distribute your Personal Data to external marketing agencies. Data is only shared with our vetted internal Computer Science developers, who are bound by stringent Non-Disclosure Agreements (NDAs). We may employ third-party service providers (e.g., AWS, Google Cloud) solely for hosting and operational infrastructure, ensuring they comply with strict privacy laws.</p>
         <p>We reserve the right to disclose your information if legally mandated by a court of law or federal subpoena to protect our legal rights.</p>
         <h4>5. Data Retention Lifecycle</h4>
-                <p>We retain your Personal Data only for as long as is absolutely necessary for the purposes set out in this Policy. Once a project is finalized and the warranty period expires, all sensitive source code and credentials will be purged from our active servers unless requested otherwise by the Client for maintenance contracts.</p>
-        <p>Billing and invoice records are retained for a minimum of 7 years to comply with United States federal tax laws and audit requirements.</p>
+        <p>We retain your Personal Data only for as long as is absolutely necessary for the purposes set out in this Policy. Once a project is finalized and the warranty period expires, all sensitive source code and credentials will be purged from our active servers unless requested otherwise by the Client for maintenance contracts.</p>
+                <p>Billing and invoice records are retained for a minimum of 7 years to comply with United States federal tax laws and audit requirements.</p>
         <h4>6. Security Measures and Breaches</h4>
         <p>The security of your data is paramount. We implement enterprise-grade encryption (SSL/TLS) for data in transit and AES-256 for data at rest. Access to personal data is strictly role-based. While we strive to use commercially acceptable means to protect your data, no internet transmission is 100% secure.</p>
         <p>In the unlikely event of a data breach, we will notify affected clients within 72 hours, detailing the nature of the breach and the mitigation steps taken.</p>
@@ -295,7 +290,7 @@
         <p>We reserve the unilateral right to update or modify this Privacy Policy at any time. All changes will be posted on this page with an updated revision date. Continued use of our services constitutes acceptance of the new Policy.</p>
       </div>
       <div class="modal-footer">
-        <button class="accept-btn" onclick="acceptPolicy('privacy')">I Accept & Agree to these Privacy Policies</button>
+        <button class="accept-btn" onclick="window.acceptPolicy('privacy')">I Accept & Agree to these Privacy Policies</button>
       </div>
     </div>
   </div>
@@ -305,7 +300,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h3>Terms and Conditions</h3>
-        <button class="close-modal" onclick="closeModal('termsModal')">&times;</button>
+        <button class="close-modal" onclick="window.closeModal('termsModal')">&times;</button>
       </div>
       <div class="modal-body" id="termsBody">
         <p><strong>Effective Date: November 2026</strong></p>
@@ -337,113 +332,113 @@
         <p>These Terms, combined with the specific Project Proposal, constitute the entire agreement between VRM Tech Solutions and the Client, superseding any prior verbal or written communications, promises, or understandings.</p>
       </div>
       <div class="modal-footer">
-        <button class="accept-btn" onclick="acceptPolicy('terms')">I Accept & Agree to these Terms</button>
+        <button class="accept-btn" onclick="window.acceptPolicy('terms')">I Accept & Agree to these Terms</button>
       </div>
     </div>
   </div>
 
   <script>
-    // Envolvemos todo el JS para asegurarnos de que el DOM carga correctamente en iOS Safari
-    document.addEventListener("DOMContentLoaded", function() {
-      
-      const hamburgerBtn = document.getElementById('hamburger-btn');
-      const navOverlay = document.getElementById('nav-overlay');
-      const closeNavBtn = document.getElementById('close-nav-btn');
-      const navLinks = document.querySelectorAll('.nav-link');
-
-      hamburgerBtn.addEventListener('click', () => {
-        navOverlay.style.display = 'flex';
-      });
-
-      closeNavBtn.addEventListener('click', () => {
-        navOverlay.style.display = 'none';
-      });
-
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          navOverlay.style.display = 'none';
-        });
-      });
-
-      const faqData = [
-        { q: "1. What exact services does VRM Tech Solutions offer?", a: "We provide comprehensive computer science services, including React full-stack development, AI automation, custom educational software, API integration, and cloud infrastructure management." },
-        { q: "2. Do you work with international clients?", a: "Currently, our services are strictly tailored and provided exclusively for clients and businesses based in the United States." },
-        { q: "3. What is the standard process to start a project?", a: "Submit your brief via our form. We respond within 24 hours to schedule a Zoom call, evaluate the timeline/budget, and upon approval, execute the project immediately." },
-        { q: "4. Do I have to pay upfront?", a: "Established LLCs require no upfront payment. Startups and independent clients must submit a mandatory 50% deposit before kickoff." },
-        { q: "5. Will I own the source code?", a: "Yes, upon final payment, you own the intellectual property of the final deliverable, though we retain rights to our proprietary baseline frameworks." },
-        { q: "6. Can you fix or update an existing website?", a: "Yes, as long as we have access to the source code and environment, our team can audit, fix, and scale existing digital infrastructure." },
-        { q: "7. Who is Vastian Rosario Marte?", a: "He is the Owner and Project Manager. He handles all client communication and project tracking, ensuring the technical team delivers exactly what was requested." },
-        { q: "8. Do you build mobile applications?", a: "Yes, our computer science graduates are skilled in cross-platform mobile development for both iOS and Android environments." },
-        { q: "9. How do you handle sensitive data?", a: "All data is handled under strict NDAs, and we utilize industry-standard encryption protocols for data in transit and at rest." },
-        { q: "10. What happens if I change my mind during development?", a: "Changes outside the initial agreed scope (Scope Creep) require a Change Order, which will adjust the timeline and budget accordingly." },
-        { q: "11. Are there any hidden fees?", a: "No. The budget presented during the Evaluation phase is exactly what you pay, provided the scope of work remains unchanged." },
-        { q: "12. How do we communicate during the project?", a: "We utilize Slack, Zoom, and email for transparent, continuous updates throughout the development lifecycle." },
-        { q: "13. Do you provide server hosting?", a: "We can set up and deploy your application on AWS, Google Cloud, or your preferred hosting provider, but you maintain ownership of the hosting accounts." },
-        { q: "14. How large is your team?", a: "We have a dedicated core team of Computer Science graduates, allowing us to scale depending on the specific demands of your project." },
-        { q: "15. Do you guarantee your work?", a: "Yes, we guarantee adherence to the timeline, budget, and exact specifications agreed upon in the project proposal." },
-        { q: "16. What is the warranty period?", a: "We provide a 14-day warranty period post-deployment to resolve any bugs related to the original scope of work free of charge." },
-        { q: "17. Do you use templates?", a: "No, all solutions are custom-built to ensure scalability, security, and specific alignment with your business goals." },
-        { q: "18. What technologies do you specialize in?", a: "React, Node.js, Python, AI Integrations, SQL/NoSQL databases, and robust back-end architectural design." },
-        { q: "19. Can you sign an NDA before we talk?", a: "Absolutely. We are fully prepared to sign your Non-Disclosure Agreement before any sensitive project details are discussed." },
-        { q: "20. What payment methods are accepted?", a: "We process payments strictly through secure Direct Deposit. Our banking details are available in the Payment section." },
-        { q: "21. How long does an average project take?", a: "It depends entirely on the scope. A simple integration might take days, while enterprise software can take months. We give exact timelines after evaluation." },
-        { q: "22. Do you offer ongoing maintenance?", a: "Yes, post-launch maintenance contracts can be established to handle updates, security patches, and scaling." },
-        { q: "23. Can you integrate third-party APIs?", a: "Yes, we specialize in connecting diverse systems, from payment gateways (Stripe) to complex CRM and AI APIs." },
-        { q: "24. Is my project too small for you?", a: "We evaluate all projects. If it involves computer science and solves a problem, we are interested in discussing it." },
-        { q: "25. How do I contact support?", a: "You can reach out directly via the contact form on this website or email us at info@vrmtechsolution.com." }
-      ];
-
-      const faqList = document.getElementById('faq-list');
-      faqData.forEach((item, index) => {
-        const faqHTML = `
-          <div class="faq-item">
-            <button class="faq-question" type="button">
-              ${item.q}
-              <span class="faq-icon">▼</span>
-            </button>
-            <div class="faq-answer">
-              <p style="margin: 15px 0;">${item.a}</p>
-            </div>
-          </div>
-        `;
-        faqList.insertAdjacentHTML('beforeend', faqHTML);
-      });
-
-      const faqItems = document.querySelectorAll('.faq-item');
-      faqItems.forEach(item => {
-        const btn = item.querySelector('.faq-question');
-        btn.addEventListener('click', () => {
-          const isActive = item.classList.contains('active');
-          faqItems.forEach(i => i.classList.remove('active'));
-          if (!isActive) item.classList.add('active');
-        });
-      });
-
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (!window.isPrivacyAccepted || !window.isTermsAccepted) {
-          alert('You must open and accept both legal documents before submitting.');
-          return;
-        }
-
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-        const message = document.getElementById('message').value;
-
-        const subject = `Project Inquiry from ${name}`;
-        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0A%0D%0AProject Explanation:%0D%0A${message}`;
-        
-        window.location.href = `mailto:info@vrmtechsolution.com?subject=${subject}&body=${body}`;
-      });
-    });
-
-    // Variables globales y funciones accesibles desde los eventos onclick en línea del HTML
+    // Variables globales explícitas en el objeto window para evitar problemas de alcance en iOS
     window.isPrivacyAccepted = false;
     window.isTermsAccepted = false;
 
-    function handleCheckboxClick(event, type) {
+    // Elementos del menú
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navOverlay = document.getElementById('nav-overlay');
+    const closeNavBtn = document.getElementById('close-nav-btn');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    hamburgerBtn.addEventListener('click', function() {
+      navOverlay.style.display = 'flex';
+    });
+
+    closeNavBtn.addEventListener('click', function() {
+      navOverlay.style.display = 'none';
+    });
+
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        navOverlay.style.display = 'none';
+      });
+    });
+
+    // Inserción de FAQs
+    const faqData = [
+      { q: "1. What exact services does VRM Tech Solutions offer?", a: "We provide comprehensive computer science services, including React full-stack development, AI automation, custom educational software, API integration, and cloud infrastructure management." },
+      { q: "2. Do you work with international clients?", a: "Currently, our services are strictly tailored and provided exclusively for clients and businesses based in the United States." },
+      { q: "3. What is the standard process to start a project?", a: "Submit your brief via our form. We respond within 24 hours to schedule a Zoom call, evaluate the timeline/budget, and upon approval, execute the project immediately." },
+      { q: "4. Do I have to pay upfront?", a: "Established LLCs require no upfront payment. Startups and independent clients must submit a mandatory 50% deposit before kickoff." },
+      { q: "5. Will I own the source code?", a: "Yes, upon final payment, you own the intellectual property of the final deliverable, though we retain rights to our proprietary baseline frameworks." },
+      { q: "6. Can you fix or update an existing website?", a: "Yes, as long as we have access to the source code and environment, our team can audit, fix, and scale existing digital infrastructure." },
+      { q: "7. Who is Vastian Rosario Marte?", a: "He is the Owner and Project Manager. He handles all client communication and project tracking, ensuring the technical team delivers exactly what was requested." },
+      { q: "8. Do you build mobile applications?", a: "Yes, our computer science graduates are skilled in cross-platform mobile development for both iOS and Android environments." },
+      { q: "9. How do you handle sensitive data?", a: "All data is handled under strict NDAs, and we utilize industry-standard encryption protocols for data in transit and at rest." },
+      { q: "10. What happens if I change my mind during development?", a: "Changes outside the initial agreed scope (Scope Creep) require a Change Order, which will adjust the timeline and budget accordingly." },
+      { q: "11. Are there any hidden fees?", a: "No. The budget presented during the Evaluation phase is exactly what you pay, provided the scope of work remains unchanged." },
+      { q: "12. How do we communicate during the project?", a: "We utilize Slack, Zoom, and email for transparent, continuous updates throughout the development lifecycle." },
+      { q: "13. Do you provide server hosting?", a: "We can set up and deploy your application on AWS, Google Cloud, or your preferred hosting provider, but you maintain ownership of the hosting accounts." },
+      { q: "14. How large is your team?", a: "We have a dedicated core team of Computer Science graduates, allowing us to scale depending on the specific demands of your project." },
+      { q: "15. Do you guarantee your work?", a: "Yes, we guarantee adherence to the timeline, budget, and exact specifications agreed upon in the project proposal." },
+      { q: "16. What is the warranty period?", a: "We provide a 14-day warranty period post-deployment to resolve any bugs related to the original scope of work free of charge." },
+      { q: "17. Do you use templates?", a: "No, all solutions are custom-built to ensure scalability, security, and specific alignment with your business goals." },
+      { q: "18. What technologies do you specialize in?", a: "React, Node.js, Python, AI Integrations, SQL/NoSQL databases, and robust back-end architectural design." },
+      { q: "19. Can you sign an NDA before we talk?", a: "Absolutely. We are fully prepared to sign your Non-Disclosure Agreement before any sensitive project details are discussed." },
+      { q: "20. What payment methods are accepted?", a: "We process payments strictly through secure Direct Deposit. Our banking details are available in the Payment section." },
+      { q: "21. How long does an average project take?", a: "It depends entirely on the scope. A simple integration might take days, while enterprise software can take months. We give exact timelines after evaluation." },
+      { q: "22. Do you offer ongoing maintenance?", a: "Yes, post-launch maintenance contracts can be established to handle updates, security patches, and scaling." },
+      { q: "23. Can you integrate third-party APIs?", a: "Yes, we specialize in connecting diverse systems, from payment gateways (Stripe) to complex CRM and AI APIs." },
+      { q: "24. Is my project too small for you?", a: "We evaluate all projects. If it involves computer science and solves a problem, we are interested in discussing it." },
+      { q: "25. How do I contact support?", a: "You can reach out directly via the contact form on this website or email us at info@vrmtechsolution.com." }
+    ];
+
+    const faqList = document.getElementById('faq-list');
+    faqData.forEach(function(item) {
+      const faqHTML = `
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            ${item.q}
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p style="margin: 15px 0;">${item.a}</p>
+          </div>
+        </div>
+      `;
+      faqList.insertAdjacentHTML('beforeend', faqHTML);
+    });
+
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(function(item) {
+      const btn = item.querySelector('.faq-question');
+      btn.addEventListener('click', function() {
+        const isActive = item.classList.contains('active');
+        faqItems.forEach(function(i) { i.classList.remove('active'); });
+        if (!isActive) item.classList.add('active');
+      });
+    });
+
+    // Envío del formulario
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (!window.isPrivacyAccepted || !window.isTermsAccepted) {
+        alert('You must open and accept both legal documents before submitting.');
+        return;
+      }
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const message = document.getElementById('message').value;
+
+      const subject = `Project Inquiry from ${name}`;
+      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0A%0D%0AProject Explanation:%0D%0A${message}`;
+      
+      window.location.href = `mailto:info@vrmtechsolution.com?subject=${subject}&body=${body}`;
+    });
+
+    // Funciones globales anexadas a window para los eventos onclick en línea
+    window.handleCheckboxClick = function(event, type) {
       if (type === 'privacy' && !window.isPrivacyAccepted) {
         event.preventDefault();
         document.getElementById('privacyError').style.display = 'block';
@@ -452,31 +447,31 @@
         event.preventDefault();
         document.getElementById('termsError').style.display = 'block';
       }
-    }
+    };
 
-    function openModal(modalId) {
+    window.openModal = function(modalId) {
       document.getElementById(modalId).style.display = 'flex';
       document.body.classList.add('modal-open');
-    }
+    };
 
-    function closeModal(modalId) {
+    window.closeModal = function(modalId) {
       document.getElementById(modalId).style.display = 'none';
       document.body.classList.remove('modal-open');
-    }
+    };
 
-    function acceptPolicy(type) {
+    window.acceptPolicy = function(type) {
       if (type === 'privacy') {
         window.isPrivacyAccepted = true;
         document.getElementById('privacyConsent').checked = true;
         document.getElementById('privacyError').style.display = 'none';
-        closeModal('privacyModal');
+        window.closeModal('privacyModal');
       } else if (type === 'terms') {
         window.isTermsAccepted = true;
         document.getElementById('termsConsent').checked = true;
         document.getElementById('termsError').style.display = 'none';
-        closeModal('termsModal');
+        window.closeModal('termsModal');
       }
-    }
+    };
   </script>
 </body>
 </html>
