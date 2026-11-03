@@ -204,17 +204,22 @@
       </div>
     </section>
 
-    <section id="about" class="section container">
-      <div class="section-title">Leadership / About Us</div>
-      <div class="founder-profile">
-        <img src="1000007474_3.png" alt="Vastian Rosario Marte" class="founder-img">
-        <div>
-          <h2 style="margin-bottom: 10px;">Vastian Rosario Marte</h2>
-          <strong style="color: var(--accent); display: block; margin-bottom: 20px; font-size: 1.2rem;">Owner & Project Manager</strong>
-          <p style="color: var(--muted); margin: 0; font-size: 1.1rem;">As the founder and project manager of VRM Tech Solutions, I ensure that your vision is clearly understood and perfectly executed. Our team consists of highly skilled Computer Science graduates specializing in React, full-stack, AI automation, and more. I manage all client communications, ensuring precise deadlines and unparalleled quality so you don't have to worry about the technical execution.</p>
-        </div>
-      </div>
-    </section>
+            <!-- ABOUT / LEADERSHIP SECTION -->
+        <section id="about" class="section">
+            <h2 class="section-title">Leadership / About Us</h2>
+            <div class="founder-profile">
+                <img src="1000007474_3.png" alt="Vastian Rosario Marte">
+                <h3>Vastian Rosario Marte</h3>
+                <div class="role">Owner & Project Manager</div>
+                <p>As the founder and project manager of VRM Tech Solutions, I ensure that your vision is clearly understood and perfectly executed. Our team consists of highly skilled Computer Science graduates specializing in React, full-stack, AI automation, and more. I manage all client communications, ensuring precise deadlines and unparalleled quality so you don't have to worry about the technical execution.</p>
+                
+                <div style="margin-top: 1rem; font-size: 0.95rem;">
+                    <a href="mailto:info@vrmtechsolutions.com" style="color: var(--accent); text-decoration: none; font-weight: 600;">info@vrmtechsolutions.com</a>
+                    <span style="color: var(--muted); margin: 0 8px;">|</span>
+                    <a href="https://www.linkedin.com/in/vastian-rosario-216632388/" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600;">LinkedIn Profile</a>
+                </div>
+            </div>
+        </section>
 
     <section id="faq" class="section container">
       <div class="section-title">Knowledge Base</div>
@@ -348,7 +353,8 @@
       <h2>Send Us Your Idea</h2>
       <p style="color: var(--muted); margin-bottom: 40px;">Just give us a brief explanation of what you need. We'll handle the rest.</p>
       
-      <form class="contact-form" id="contactForm">
+      <form id="contactForm" action="mailto:info@vrmtechsolutions.com" method="POST" enctype="text/plain">
+        
         <div class="form-group">
           <label for="name">Your Name</label>
           <input type="text" id="name" required placeholder="John Doe">
