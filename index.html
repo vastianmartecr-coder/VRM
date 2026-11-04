@@ -81,9 +81,9 @@
     textarea { height: 180px; resize: vertical; }
     
     .checkbox-container { margin-bottom: 25px; }
-    .checkbox-group { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.95rem; }
-    .checkbox-group input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--accent); cursor: pointer; -webkit-appearance: auto; appearance: auto; pointer-events: none; }
-    .policy-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: 700; margin-left: 5px; pointer-events: auto; }
+    .checkbox-group { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.95rem; cursor: pointer; }
+    .checkbox-group input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--accent); cursor: pointer; -webkit-appearance: auto; appearance: auto; }
+    .policy-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: 700; margin-left: 5px; }
     
     .error-message { color: var(--error); font-size: 0.85rem; margin-top: 8px; display: none; font-weight: 600; }
     
@@ -103,7 +103,7 @@
     .capabilities-overlay { position: fixed; top: 0; left: 100%; width: 100%; height: 100%; height: 100dvh; background: var(--bg); z-index: 300; transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1); overflow-y: auto; color: var(--text); padding-bottom: 80px; -webkit-overflow-scrolling: touch; }
     .capabilities-overlay.active { left: 0; }
     .cap-header { padding: 30px 0; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(9, 12, 20, 0.95); backdrop-filter: blur(10px); z-index: 310; display: flex; align-items: center; gap: 20px; }
-    .cap-back-btn { background: var(--panel); border: 1px solid var(--line); color: var(--text); padding: 10px 20px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.3s; -webkit-appearance: none; appearance: none; }
+    .cap-back-btn { background: var(--panel); border: 1px solid var(--line); color: var(--text); padding: 10px 20px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.3s; }
     .cap-header h2 { margin: 0; font-size: 1.5rem; }
     .cap-content { padding-top: 40px; }
     .cap-list { display: flex; flex-direction: column; gap: 25px; margin-top: 40px; }
@@ -116,6 +116,58 @@
     .cap-cta { margin-top: 60px; background: rgba(145, 162, 255, 0.05); border: 1px solid var(--accent); padding: 50px; border-radius: 16px; text-align: center; }
     .cap-cta h3 { color: var(--text); font-size: 2rem; margin-top: 0; margin-bottom: 15px; }
     .cap-cta p { color: var(--muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px; }
+
+    /* ZONA OSCURA DE PERFIL Y ENLACES */
+    .profile-section-divider {
+      width: 100%;
+      height: 1px;
+      background-color: var(--line);
+      margin: 60px 0 40px 0;
+    }
+
+    .profile-contact-zone {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 40px;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .profile-contact-zone h3 {
+      color: var(--text);
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .profile-links-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .profile-link-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line);
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .profile-link-item:hover {
+      background: rgba(145, 162, 255, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
     
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -137,6 +189,8 @@
       .btn-payment { margin-left: 0; display: block; width: fit-content; margin: 15px auto 0; }
       .cap-card { flex-direction: column; align-items: flex-start; text-align: left; }
       .cap-card img { width: 100%; height: 200px; }
+      .profile-links-container { flex-direction: column; align-items: stretch; }
+      .profile-link-item { justify-content: center; }
     }
   </style>
 </head>
@@ -169,6 +223,7 @@
       <div>
         <a href="#process" class="btn-link">Click Here to See Our 4-Step Process</a>
         <a href="#payment-info" class="btn-link btn-payment">Make a Payment</a>
+        <a href="#about" class="btn-link btn-payment" style="background: var(--panel);">Contact</a>
       </div>
     </section>
 
@@ -214,12 +269,25 @@
           <p style="color: var(--muted); margin: 0; font-size: 1.1rem;">As the founder and project manager of VRM Tech Solutions, I ensure that your vision is clearly understood and perfectly executed. Our team consists of highly skilled Computer Science graduates specializing in React, full-stack, AI automation, and more. I manage all client communications, ensuring precise deadlines and unparalleled quality so you don't have to worry about the technical execution.</p>
         </div>
       </div>
-    </section>
 
-    <!-- SEPARADOR Y ESPACIO AÑADIDO ANTES DE KNOWLEDGE BASE -->
-    <div class="container" style="padding: 40px 0;">
-      <hr style="border: none; border-top: 1px solid var(--line); margin: 0;">
-    </div>
+      <!-- ZONA DE ENLACES DE CONTACTO DIRECTO -->
+      <div class="profile-section-divider"></div>
+      <div class="profile-contact-zone">
+        <h3>Connect with Vastian Rosario Marte</h3>
+        <p style="color: var(--muted); margin-bottom: 25px; font-size: 0.95rem;">Reach out directly via phone, email, or professional network.</p>
+        <div class="profile-links-container">
+          <a href="tel:+14197703051" class="profile-link-item">
+            <span>📞</span> +1 (419) 770-3051
+          </a>
+          <a href="mailto:Info@vrmtechsolutions.com" class="profile-link-item">
+            <span>✉️</span> Info@vrmtechsolutions.com
+          </a>
+          <a href="https://www.linkedin.com/in/vastian-rosario-216632388/" target="_blank" rel="noopener noreferrer" class="profile-link-item">
+            <span>💼</span> LinkedIn Profile
+          </a>
+        </div>
+      </div>
+    </section>
 
     <section id="faq" class="section container">
       <div class="section-title">Knowledge Base</div>
@@ -348,7 +416,7 @@
 
         <div class="faq-item">
           <button class="faq-question" type="button">25. How do I contact support?<span class="faq-icon">▼</span></button>
-          <div class="faq-answer"><p style="margin: 15px 0;">You can reach out directly via the contact form on this website or email us at info@vrmtechsolutions.com.</p></div>
+          <div class="faq-answer"><p style="margin: 15px 0;">You can reach out directly via the contact form on this website or email us at info@vrmtechsolution.com.</p></div>
         </div>
       </div>
     </section>
@@ -381,7 +449,7 @@
             <input type="checkbox" id="privacyConsent">
             <label for="privacyConsent">I have read and agree to the <span class="policy-link" onclick="window.openModal('privacyModal')">Privacy Policy</span></label>
           </div>
-          <div class="error-message" id="privacyError">⚠️ You must read and accept the Privacy Policy from the window first.</div>
+          <div class="error-message" id="privacyError">⚠️ You must accept the Privacy Policy to submit.</div>
         </div>
 
         <div class="checkbox-container">
@@ -389,7 +457,7 @@
             <input type="checkbox" id="termsConsent">
             <label for="termsConsent">I have read and agree to the <span class="policy-link" onclick="window.openModal('termsModal')">Terms and Conditions</span></label>
           </div>
-          <div class="error-message" id="termsError">⚠️ You must read and accept the Terms and Conditions from the window first.</div>
+          <div class="error-message" id="termsError">⚠️ You must accept the Terms and Conditions to submit.</div>
         </div>
 
         <button type="submit">Submit Request</button>
@@ -397,7 +465,6 @@
     </section>
   </main>
 
-  <!-- SECCIÓN DE CONTACTO DIRECTO EN EL FONDO OSCURO -->
   <footer id="payment-info" class="section container" style="border: none; text-align: center;">
     <div class="payment-box">
       <h3 style="margin-top: 0; color: var(--text); font-size: 1.8rem;">Direct Deposit Information</h3>
@@ -410,15 +477,7 @@
         <div><strong>Account Number:</strong> 4565591156</div>
       </div>
     </div>
-
-    <!-- ENLACES DE TELÉFONO, CORREO Y LINKEDIN CONFIGURADOS PARA ABRIR SU APLICACIÓN -->
-    <div style="margin-top: 40px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; font-size: 1rem;">
-      <a href="tel:+14197703051" style="color: var(--accent); text-decoration: none; font-weight: 600;">📞 +1 (419) 770-3051</a>
-      <a href="mailto:info@vrmtechsolutions.com" style="color: var(--accent); text-decoration: none; font-weight: 600;">✉️ info@vrmtechsolutions.com</a>
-      <a href="https://www.linkedin.com/in/vastian-rosario-216632388/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none; font-weight: 600;">💼 LinkedIn Profile</a>
-    </div>
-
-    <p style="margin-top: 30px; font-size: 0.9rem; color: var(--muted);">&copy; 2026 VRM Tech Solutions. All rights reserved.</p>
+    <p style="margin-top: 60px; font-size: 0.9rem; color: var(--muted);">&copy; 2026 VRM Tech Solutions. All rights reserved.</p>
   </footer>
 
   <!-- VENTANA FLUIDA DE CAPACIDADES TÉCNICAS -->
@@ -538,14 +597,14 @@
         <h4>7. Cookies and Tracking Technologies</h4>
         <p>We use session and persistent cookies to track website activity and store certain information to enhance user experience. You can instruct your browser to refuse all cookies, but doing so may limit your ability to use certain functionalities of our site.</p>
         <h4>8. User Rights (GDPR & CCPA Compliance)</h4>
-        <p>Depending on your jurisdiction, you possess specific rights regarding your data: The right to access, the right to rectification, the right to erasure (Right to be Forgotten), the right to restrict processing, and the right to data portability. To exercise any of these rights, contact us at info@vrmtechsolutions.com. We have 30 days to respond to lawful requests.</p>
+        <p>Depending on your jurisdiction, you possess specific rights regarding your data: The right to access, the right to rectification, the right to erasure (Right to be Forgotten), the right to restrict processing, and the right to data portability. To exercise any of these rights, contact us at info@vrmtechsolution.com. We have 30 days to respond to lawful requests.</p>
         <h4>9. Children's Privacy</h4>
         <p>Our services are strictly intended for businesses and individuals over the age of 18. We do not knowingly collect personally identifiable information from anyone under the age of 18.</p>
         <h4>10. Amendments to this Policy</h4>
         <p>We reserve the unilateral right to update or modify this Privacy Policy at any time. All changes will be posted on this page with an updated revision date. Continued use of our services constitutes acceptance of the new Policy.</p>
       </div>
       <div class="modal-footer">
-        <button class="accept-btn" onclick="window.acceptPolicy('privacy')">I Accept & Agree to these Privacy Policies</button>
+        <button class="accept-btn" onclick="window.closeModal('privacyModal')">Close Policy</button>
       </div>
     </div>
   </div>
@@ -587,26 +646,12 @@
         <p>These Terms, combined with the specific Project Proposal, constitute the entire agreement between VRM Tech Solutions and the Client, superseding any prior verbal or written communications, promises, or understandings.</p>
       </div>
       <div class="modal-footer">
-        <button class="accept-btn" onclick="window.acceptPolicy('terms')">I Accept & Agree to these Terms</button>
+        <button class="accept-btn" onclick="window.closeModal('termsModal')">Close Terms</button>
       </div>
     </div>
   </div>
 
   <script>
-    // CORRECCIÓN DE COMPORTAMIENTO DE PÁGINA: Forzar siempre la carga desde el inicio (scroll al tope)
-    window.addEventListener('beforeunload', function() {
-      window.scrollTo(0, 0);
-    });
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    window.addEventListener('load', function() {
-      window.scrollTo(0, 0);
-    });
-
-    window.isPrivacyAccepted = false;
-    window.isTermsAccepted = false;
-
     var hamburgerBtn = document.getElementById('hamburger-btn');
     var navOverlay = document.getElementById('nav-overlay');
     var closeNavBtn = document.getElementById('close-nav-btn');
@@ -651,16 +696,17 @@
       closeCapsBtn.addEventListener('click', function() {
         capsOverlay.classList.remove('active');
         document.body.classList.remove('modal-open');
+        window.scrollTo({ top: 0, behavior: 'instant' });
       });
     }
 
     window.goToContactFromCaps = function() {
       capsOverlay.classList.remove('active');
       document.body.classList.remove('modal-open');
+      window.scrollTo({ top: 0, behavior: 'instant' });
       setTimeout(function() {
-        var req = document.getElementById('request');
-        if (req) req.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
+        document.getElementById('request').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     };
 
     var faqItems = document.querySelectorAll('.faq-item');
@@ -697,20 +743,6 @@
       }
     };
 
-    window.acceptPolicy = function(type) {
-      if (type === 'privacy') {
-        window.isPrivacyAccepted = true;
-        document.getElementById('privacyConsent').checked = true;
-        document.getElementById('privacyError').style.display = 'none';
-        window.closeModal('privacyModal');
-      } else if (type === 'terms') {
-        window.isTermsAccepted = true;
-        document.getElementById('termsConsent').checked = true;
-        document.getElementById('termsError').style.display = 'none';
-        window.closeModal('termsModal');
-      }
-    };
-
     window.scrollToContact = function() {
       var requestSection = document.getElementById('request');
       if (requestSection) {
@@ -718,28 +750,32 @@
       }
     };
     
-    // CONFIGURACIÓN DEL FORMULARIO DE CONTACTO Y VALIDACIÓN DE CHECKBOXES CON AVISO EN ROJO
     var contactForm = document.getElementById('contactForm');
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
+        var privacyConsent = document.getElementById('privacyConsent');
+        var termsConsent = document.getElementById('termsConsent');
+        var privacyError = document.getElementById('privacyError');
+        var termsError = document.getElementById('termsError');
+        
         var isValid = true;
-
-        if (!window.isPrivacyAccepted) {
-          document.getElementById('privacyError').style.display = 'block';
+        
+        if (!privacyConsent.checked) {
+          privacyError.style.display = 'block';
           isValid = false;
         } else {
-          document.getElementById('privacyError').style.display = 'none';
+          privacyError.style.display = 'none';
         }
-
-        if (!window.isTermsAccepted) {
-          document.getElementById('termsError').style.display = 'block';
+        
+        if (!termsConsent.checked) {
+          termsError.style.display = 'block';
           isValid = false;
         } else {
-          document.getElementById('termsError').style.display = 'none';
+          termsError.style.display = 'none';
         }
-
+        
         if (!isValid) {
           return;
         }
@@ -749,16 +785,15 @@
         var phone = document.getElementById('phone').value;
         var message = document.getElementById('message').value;
 
-        var subject = encodeURIComponent('New Project Inquiry from ' + name);
-        var body = encodeURIComponent(
-          'Name: ' + name + '\n' +
-          'Email: ' + email + '\n' +
-          'Phone: ' + phone + '\n\n' +
-          'Project Details:\n' + message
+        var mailSubject = encodeURIComponent("New Project Request from " + name);
+        var mailBody = encodeURIComponent(
+          "Name: " + name + "\n" +
+          "Email: " + email + "\n" +
+          "Phone: " + phone + "\n\n" +
+          "Project Details:\n" + message
         );
 
-        // Abrir el cliente de correo predeterminado con los datos listos
-        window.location.href = 'mailto:info@vrmtechsolutions.com?subject=' + subject + '&body=' + body;
+        window.location.href = "mailto:Info@vrmtechsolutions.com?subject=" + mailSubject + "&body=" + mailBody;
       });
     }
   </script>
